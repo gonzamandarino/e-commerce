@@ -1,8 +1,33 @@
+/*  header */ 
+
+h1{  color: rgba(255, 255, 255, 0.87);}
+
+.btn-header, .btn-header a{
+  text-decoration: none;
+  color: aliceblue;
+}
+
+*/
+
+.btn-warning{
+color: black;
+}
+
+.activo,.activo a  {
+  color: #ffca2c; 
+  text-decoration: underline;
+  text-decoration-color: #ffca2c;
+}
+
+
+/* fin header */
 #root {
-  max-width: 1280px;
+  max-width: max-content;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
 }
 
 .logo {
@@ -39,4 +64,9 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.btn-sesion{
+  border-radius: 20px;
+
 }
