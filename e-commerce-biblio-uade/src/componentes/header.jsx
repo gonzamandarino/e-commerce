@@ -2,15 +2,15 @@ import { useState } from "react";
 import viteLogo from '/vite.svg'
 
 
-function Header(){
-
-
+function Header({actualizarEstado}){
     const [botonesActivados, setBotonesActivados] = useState([false, false, false, false]);
 
-    const cambiar = (index) => {
+    const handleClick=(index)=>{
         const nuevosBotonesActivados = botonesActivados.map((estado, i) => i === index);
         setBotonesActivados(nuevosBotonesActivados);
+        actualizarEstado(index)
     }
+    
     
 
     return(
@@ -26,10 +26,10 @@ function Header(){
                         </div>
                         </div>
                         <div className="btn-group btn-group-toggle position-relative" data-toggle="buttons">
-                            <button className={`btn btn-header ${botonesActivados[0] ? 'activo' : ''}`} onClick={() => cambiar(0)}> <a>Inicio</a> </button>
-                            <button className={`btn btn-header ${botonesActivados[1] ? 'activo' : ''}`} onClick={() => cambiar(1)}> <a>Catalogo</a> </button>
-                            <button className={`btn btn-header ${botonesActivados[2] ? 'activo' : ''}`} onClick={() => cambiar(2)}> <a >Preguntas</a></button>
-                            <button className={`btn btn-header ${botonesActivados[3] ? 'activo' : ''}`} onClick={() => cambiar(3)}> <a >Contacto</a></button>
+                            <button className={`btn btn-header ${botonesActivados[0] ? 'activo' : ''}`} onClick={()=>handleClick(0)}> <a>Inicio</a> </button>
+                            <button className={`btn btn-header ${botonesActivados[1] ? 'activo' : ''}`} onClick={()=>handleClick(1)}> <a>Catalogo</a> </button>
+                            <button className={`btn btn-header ${botonesActivados[2] ? 'activo' : ''}`} onClick={() => handleClick(2)}> <a >Preguntas</a></button>
+                            <button className={`btn btn-header ${botonesActivados[3] ? 'activo' : ''}`} onClick={() => handleClick(3)}> <a >Contacto</a></button>
                         </div>
                     </div>
                     <div className="col-md-4">
