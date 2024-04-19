@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import Header from './componentes/header'
 import Inicio from './secciones/inicio/inicio'
+import Catalogo from './secciones/catalogo/catalogo'
 
 import './App.css'
 
@@ -10,11 +11,13 @@ function App() {
 
   return (
     <>
-    
+      
+          
         <Header></Header>
+        <Inicio></Inicio>
+      
+        <Catalogo></Catalogo>
         
-    
-      <Inicio></Inicio>
     </>
   )
 }

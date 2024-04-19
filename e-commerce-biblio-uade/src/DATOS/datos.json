@@ -1,0 +1,44 @@
+{
+    "autor":"biblio-uade",
+    "fecha-actualización":"19-4-2024",
+    "categorias":["Terror","Ficcion","Fantasia","Ciencia ficcion","Filosofia"],
+    "catalogo":[    
+        {"id":0,
+        "nombre":"Harry Potter y la piedra filosofal",
+        "autor":"Autor1",
+        "categoria":"fantasia",
+        "imagen":"/libro-1.png",
+        "precio":2000,
+        "resumen":"libro de echiceria adolecente mágico espiritual con un villano malote"
+        },
+
+        {"id":1,
+        "nombre":"Las palabras y las cosas",
+        "autor":"Autor2",
+        "categoria":"filosofia",
+        "imagen":"/libro-2.png",
+        "precio":3010,
+        "resumen":" Las palabras y las cosas ofrece una poderosa crítica política al modo en que el conocimiento y el poder están entrelazados en las sociedades modernas, desafiando las concepciones tradicionales de verdad, conocimiento y autoridad"
+        },
+        
+        {"id":2,
+        "nombre":"El principito",
+        "autor":"Autor3",
+        "categoria":"fantasia",
+        "imagen":"/libro-3.png",
+        "precio":7000,
+        "resumen":"  A medida que el principito relata sus encuentros con diferentes personajes en otros asteroides, el libro ofrece reflexiones sobre la naturaleza humana y la importancia de ver el mundo con los ojos del corazón."
+        },
+        
+        {"id":3,
+        "nombre":"Vigilar y castigar",
+        "autor":"Autor2",
+        "categoria":"filosofia",
+        "imagen":"/libro-4.png",
+        "precio":3010,
+        "resumen":"Vigilar y castigar ofrece una perspectiva política provocadora sobre el funcionamiento del poder y el control en las sociedades modernas, invitando a cuestionar las instituciones y prácticas que sustentan el sistema de dominación y a reflexionar sobre las implicaciones políticas de las relaciones de poder en la vida cotidiana."
+        }            
+    
+    ]
+
+}

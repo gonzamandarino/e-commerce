@@ -2,13 +2,17 @@
 
 h1{  color: rgba(255, 255, 255, 0.87);}
 
-.btn-header, .btn-header a{
+.btn-header, .btn-header a,.btn-categoria{
   text-decoration: none;
   color: aliceblue;
 }
 
-*/
+.btn:hover{
+  color: #fde503;
+  text-decoration: underline;
+  text-decoration-color: #fde503;
 
+}
 .btn-warning,.bg-warning{
 background-color: #fde503;
 }
@@ -30,7 +34,11 @@ width: 100vw;
 .Inicio{
   width: 100vw;
 }
+.inicio-central{
+  text-decoration: none;
+  color: aliceblue;
 
+}
 
 #root {
  /*  max-width: max-content;
