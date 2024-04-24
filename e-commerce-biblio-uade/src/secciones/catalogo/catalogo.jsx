@@ -1,12 +1,13 @@
 import React from 'react';
 import DATOS from '../../DATOS/datos.json';
 import Card from '../../componentes/card-libro';
-import lista from '../../componentes/lista'
-import DataGridDemo from '../../componentes/lista';
+
+
 
     
     const Catalogo = ({item, setItem}) => {
       console.log(item);
+      
       return (
         <>
         <div>
@@ -20,6 +21,8 @@ import DataGridDemo from '../../componentes/lista';
     }
     
   export default Catalogo;
+
+
         /*
   render() {
     const CategoriasCatalogo = this.state.catalogo.map(libro => (

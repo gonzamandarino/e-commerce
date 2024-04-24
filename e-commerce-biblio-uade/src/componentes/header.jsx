@@ -30,6 +30,7 @@ function Header({actualizarEstado}){
                             <button className={`btn btn-header ${botonesActivados[1] ? 'activo' : ''}`} onClick={()=>handleClick(1)}> <a>Catalogo</a> </button>
                             <button className={`btn btn-header ${botonesActivados[2] ? 'activo' : ''}`} onClick={() => handleClick(2)}> <a >Preguntas</a></button>
                             <button className={`btn btn-header ${botonesActivados[3] ? 'activo' : ''}`} onClick={() => handleClick(3)}> <a >Contacto</a></button>
+                            
                         </div>
                     </div>
                     <div className="col-md-4">
