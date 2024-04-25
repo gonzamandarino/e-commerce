@@ -20,23 +20,7 @@ padding: 1%;
     
 }
 
-.dos-partes{
-display: flex;
-
-}
-
-.parte-der{
-
-
-
-    width: 50%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-
-}
-
-.parte-izq{
-
-
-
-    width: 50%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+.prueba{
+    color: rgba(202, 34, 34, 0.87);
 
 }

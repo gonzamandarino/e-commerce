@@ -1,7 +1,7 @@
 import React from 'react';
 import DATOS from '../../DATOS/datos.json';
 import Card from '../../componentes/card-libro';
-
+import Footer from '../footer';
 
 
     
@@ -16,6 +16,7 @@ import Card from '../../componentes/card-libro';
         </h1>
         <Card item={item} setItem={setItem} ></Card>
         </div>  
+        <Footer/>
         </>
       )
     }
