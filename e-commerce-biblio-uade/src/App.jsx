@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Header from './componentes/header'
 import Inicio from './secciones/inicio/inicio'
 import Catalogo from './secciones/catalogo/catalogo'
+import Contacto from './secciones/Contacto/Contacto'
 import DATOS from './DATOS/datos.json';
 import './App.css'
 
@@ -19,7 +20,9 @@ function App() {
   return (
     <>
               <Header actualizarEstado={actualizarEstado}></Header>
-              {estadoVariable === 0 ? <Inicio /> : estadoVariable === 1 ? <Catalogo item = {item.catalogo} setItem={setItem}  /> : <Inicio />}
+              {estadoVariable === 0 ? <Inicio /> : 
+              estadoVariable === 1 ? <Catalogo item = {item.catalogo} setItem={setItem}  /> :
+              estadoVariable === 3 ? <Contacto item = {item.catalogo} setItem={setItem}  /> : <Inicio />}
 
           
 
