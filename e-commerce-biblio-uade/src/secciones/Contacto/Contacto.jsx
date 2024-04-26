@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import DATOS from '../../DATOS/datos.json';
-import Card from '../../componentes/card-libro';
 import './Contacto.css'
-import { Hidden } from '@mui/material';
 import ig from '/ig.png'
 import tw from '/twitter.png' 
 import fb from '/fb.png' 
-import Footer from '../footer';
 
 
     
@@ -32,9 +28,9 @@ import Footer from '../footer';
         setDatoContacto({
             ...datoContacto,
             [name]: value
-          });
+        });
 
-      };
+    };
 
 
             const handleClick=()=>{

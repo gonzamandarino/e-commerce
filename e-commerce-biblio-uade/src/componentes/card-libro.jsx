@@ -1,48 +1,74 @@
-import { Button } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../contexts/cartContext";
+import {Button} from '@mui/material';
 
-const Card = ({ item, setItem }) => {            
+export const Card = ({ nombre, precio, id, imagen }) => {
+  const [cart, setCart] = useContext(CartContext);
+
+  const addToCart = () => {
+    setCart((currItems) => {
+      const isItemsFound = currItems.find((item) => item.id === id);
+      if (isItemsFound) {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return [...currItems, { id, quantity: 1, precio }];
+      }
+    });
+  };
+
+  const removeItem = (id) => {
+    setCart((currItems) => {
+      if (currItems.find((item) => item.id === id)?.quantity === 1) {
+        return currItems.filter((item) => item.id !== id);
+      } else {
+        return currItems.map((item) => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        });
+      }
+    });
+  };
+
+  const getQuantityById = (id) => {
+    return cart.find((item) => item.id === id)?.quantity || 0;
+  };
+
+  const quantityPerItem = getQuantityById(id);
+
   return (
-    <>
-      <div className="container-fluid">
-        <div className="row justify-content-center">
-          {item.map((Val) => {
-            return (
-              <div
-                className="col-md-4 col-sm-6 card my-3 py-3 border-0"
-                key={Val.id}
-              >
-                <div className="card-img-top text-center">
-                  <img src={Val.imagen} alt={Val.nombre} className="photo w-75" width={"25%"} height={"150px"} />
-                </div>
-                <div className="card-body">
-                  <div className="card-price">
-                    {Val.precio}
-                  </div>
-                  <div className="card-title fw-bold fs-4">
-                    {Val.nombre} &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
-                    {Val.autor}
-                  </div>
-                  <div className="card-text">{Val.resumen}</div>
-                  <div className="card-button">
-                    <Button disabled = {!Val.stock} onClick={agregarCarrito({Val,setItem})}>Agregar</Button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </>
+    <div className="item-box">
+      {quantityPerItem > 0 && (
+        <div className="item-quantity">{quantityPerItem}</div>
+      )}
+
+      <div>{nombre}</div>
+      <img src={imagen} width="80" height="55" />
+      <div className="item-precio">${precio}</div>
+
+      {quantityPerItem === 0 ? (
+        <Button variant="outlined" className="item-add-Button" onClick={() => addToCart()}>
+          Agregar
+        </Button>
+      ) : (
+        <Button  variant="outlined" className="item-plus-Button" onClick={() => addToCart()}>
+          Agregar
+        </Button>
+      )}
+
+      {quantityPerItem > 0 && (
+        <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
+          Sacar
+        </Button>
+      )}
+    </div>
   );
 };
-
-//Intento de funcion para agregar a carrito y poner stock como false. No anda
-function agregarCarrito(item,setItem) {
-  const agregar = (item, setItem) => {
-      alert(item);
-      setItem.stock = false;
-  }
-}
-
-export default Card;
