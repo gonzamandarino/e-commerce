@@ -24,7 +24,7 @@ function App() {
         <Inicio />
       ) : estadoVariable === 1 ? (
         <Catalogo item={item.catalogo} setItem={setItem} />
-      ) : estadoVariable === 2 ? (
+      ) : estadoVariable === 3 ? (
         <Contacto item={item.catalogo} setItem={setItem} />
       ) : estadoVariable === 4 ? (
         <Registro />

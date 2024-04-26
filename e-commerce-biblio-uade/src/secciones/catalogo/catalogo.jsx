@@ -16,7 +16,7 @@ import Footer from '../footer';
         </h1>
         <Card item={item} setItem={setItem} ></Card>
         </div>  
-        <Footer/>
+        
         </>
       )
     }

@@ -9,6 +9,9 @@ function Registro(){
     
       const handleChange = (e) => {
         const { name, value } = e.target;
+
+
+
         setUsuario({
           ...usuario,
           [name]: value
@@ -16,7 +19,22 @@ function Registro(){
       };
     
       const handleSubmit = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+
+      if(usuario.nombre.trim()===""){
+        alert("Por favor, rellene su nombre")
+        return;
+    }
+    if(usuario.email.trim()===""){
+      alert("Por favor, Escriba un email")
+      return;
+  }
+    if(usuario.contrasena.trim()===""){
+      alert("Por favor, Escriba una contraseña")
+      return;
+  }
+
+
         console.log(usuario);
         // Aquí puedes enviar los datos a tu backend o realizar cualquier otra acción que necesites.
       };
