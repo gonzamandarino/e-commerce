@@ -1,5 +1,6 @@
 import Buscador from "../../componentes/buscador";
 import personaje from'/personaje-inicio.svg';
+import Footer from '../footer'
 
 function Inicio(){
     return(
@@ -20,6 +21,7 @@ function Inicio(){
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
         
     </>

@@ -16,27 +16,37 @@ function Header({actualizarEstado}){
     return(
         <>
             <header className="container-fluid">
-                <nav className="row">
-                    <div className=" col-md-8">
-                        <div className="position-relative row">
-                            <div className="col-md-2 position-relative" >
+                <div className="row">
+                <div className="col-md-2 position-relative" >
                             <img src={viteLogo} className="logo " alt="Vite logo" />
 
                         <h1>BIBLIO UADE</h1>
                         </div>
-                        </div>
-                        <div className="btn-group btn-group-toggle position-relative" data-toggle="buttons">
-                            <button className={`btn btn-header ${botonesActivados[0] ? 'activo' : ''}`} onClick={()=>handleClick(0)}> <a>Inicio</a> </button>
-                            <button className={`btn btn-header ${botonesActivados[1] ? 'activo' : ''}`} onClick={()=>handleClick(1)}> <a>Catalogo</a> </button>
-                            <button className={`btn btn-header ${botonesActivados[2] ? 'activo' : ''}`} onClick={() => handleClick(2)}> <a >Preguntas</a></button>
-                            <button className={`btn btn-header ${botonesActivados[3] ? 'activo' : ''}`} onClick={() => handleClick(3)}> <a >Contacto</a></button>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
+                        <div className="col-md-6"></div>
+
+                        <div className="col-md-4 ">
                         <button className="btn btn-lg btn-sesion btn-warning "><a href="">Iniciar sesión</a> </button> 
                         <button className="btn btn-lg btn-sesion  btn-header" aria-pressed="true"><a href="">Registro</a></button>   
-                    </div>                    
+                    </div> 
 
+
+
+
+
+
+                </div>
+                <nav className="row  text-black">
+                    <div className="col-md-1 bg-warning text-black"></div>
+                    <div className=" col-md-11 bg-warning d-flex justify-content-start text-black">
+
+                        <div className="btn-group btn-group-toggle position-relative text-black " data-toggle="buttons">
+                            <button className={` text-black btn btn-header ${botonesActivados[0] ? 'activo' : ''}`} onClick={()=>handleClick(0)}> <a>Inicio</a> </button>
+                            <button className={` text-black btn btn-header ${botonesActivados[1] ? 'activo' : ''}`} onClick={()=>handleClick(1)}> <a>Catalogo</a> </button>
+                            <button className={` text-black btn btn-header ${botonesActivados[2] ? 'activo' : ''}`} onClick={() => handleClick(2)}> <a >Preguntas</a></button>
+                            <button className={` text-black btn btn-header ${botonesActivados[3] ? 'activo' : ''}`} onClick={() => handleClick(3)}> <a >Contacto</a></button>
+                            
+                        </div>
+                    </div>                   
                 </nav>
                 <hr />
             </header>
