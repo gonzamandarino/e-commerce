@@ -25,8 +25,8 @@ function Header({actualizarEstado}){
                         <div className="col-md-6"></div>
 
                         <div className="col-md-4 ">
-                        <button className="btn btn-lg btn-sesion btn-warning "><a href="">Iniciar sesión</a> </button> 
-                        <button className="btn btn-lg btn-sesion  btn-header" aria-pressed="true"><a href="">Registro</a></button>   
+                        <button className={`btn btn-lg btn-sesion btn-warning ${botonesActivados[5] ?'activo':''}`} onClick={()=>handleClick(5)}><a href="">Iniciar sesión</a> </button> 
+                        <button className={`btn btn-lg btn-sesion  btn-header  ${botonesActivados[4] ?'activo':''}`}aria-pressed="true" onClick={()=>handleClick(4)}><a >Registro</a></button>   
                     </div> 
 
 

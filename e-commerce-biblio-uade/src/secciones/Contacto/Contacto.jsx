@@ -10,46 +10,52 @@ import Footer from '../footer';
 
 
     
-    const Contacto = () => {
+    function Contacto() {
 
-        const [nombre,setCnombre] = useState({})
-        const [mail,setCmail] = useState({})
-        const [telefono,setCtelefono] = useState({})
-        const [texto,setCtexto] = useState({})
 
-        const [datoContacto,setDatoContacto] = useState([
-            { nombre:"" },
-            { mail:"" },
-            { telefono:"" },
-            {texto:""}
 
-            ]);
+
+
+        const [datoContacto,setDatoContacto] = useState({
+            nombre:"" ,
+            mail:"" ,
+            telefono:"" ,
+            texto:""
+
+    });
             
 
 
 
-            const handleChangen = (event) => setCnombre(event.target.value);
-            const handleChangem = (event) => setCmail(event.target.value);
-            const handleChanget = (event) => setCtelefono(event.target.value);
-            const handleChangetxt = (event) => setCtexto(event.target.value);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setDatoContacto({
+            ...datoContacto,
+            [name]: value
+          });
+
+      };
 
 
             const handleClick=()=>{
                 
-                if(nombre.trim() ===""){
-                    alert("El campo no puede estar vacio");
-                    return;
-                }
-                if(mail.trim() ===""){
-                    alert("El campo no puede estar vacio");
-                    return;
-                }
-                if(texto.trim() ===""){
-                    alert("El campo no puede estar vacio");
-                    return;
-                }
 
-setDatoContacto([{nombre},{mail},{telefono},{texto}])
+if(datoContacto.nombre.trim()===""){
+    alert("Por favor, rellene su nombre")
+    return;
+}
+
+
+
+if(datoContacto.mail.trim()===""){
+    alert("Por favor, rellene su mail")
+    return;
+}
+if(datoContacto.texto.trim()===""){
+    alert("Por favor, ingrese un mensaje")
+    return;
+}
+
 console.log(datoContacto)
 
 
@@ -82,7 +88,7 @@ return (
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 text-black bg-warning">
             <form onSubmit={(e) => e.preventDefault()}> 
-            <input className="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su nombre' name="nombre" onChange={handleChangen}/>
+            <input className="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su nombre' name="nombre" onChange={handleChange}/>
             </form>
             </div>
         </div>
@@ -90,7 +96,7 @@ return (
             <div className="p-3 col-md-5 text-black display-7 rounded-5 bg-warning ">Nuestras redes sociales</div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su Mail' name="mail" onChange={handleChangem} />
+            <input class="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su Mail' name="mail" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">
@@ -101,14 +107,14 @@ return (
             </div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su Teléfono(opcional)'  name="telefono" onChange={handleChanget} />
+            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su Teléfono(opcional)'  name="telefono" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">
             <div className="p-3 col-md-5 text-black display-7 rounded-5 bg-warning ">Nuestro Teléfono:</div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su mensaje' name="texto" onChange={handleChangetxt} />
+            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su mensaje' name="texto" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">
@@ -118,7 +124,7 @@ return (
             <button onClick={handleClick} >enviar</button>
             </form></div>
         </div>
-        <Footer />
+        
         </div>
         </>
         
