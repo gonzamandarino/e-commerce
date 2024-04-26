@@ -32,9 +32,8 @@ import Footer from '../footer';
         setDatoContacto({
             ...datoContacto,
             [name]: value
-          });
-
-      };
+    });
+};
 
 
             const handleClick=()=>{
