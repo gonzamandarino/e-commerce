@@ -1,4 +1,7 @@
 import React from 'react';
+import DATOS from '../../DATOS/datos.json';
+import Card from '../../componentes/card-libro';
+
     
     const Catalogo = ({item, setItem}) => {
       console.log(item);
