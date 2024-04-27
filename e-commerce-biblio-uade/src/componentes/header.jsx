@@ -47,7 +47,7 @@ function Header(){
                             <Link to={"/"}>
                                 Inicio 
                             </Link>
-                            <Link to={"/catalogo"}>
+                            <Link to={"/catalogo"} >
                                 Catalogo
                             </Link>
                             <Link to={"/preguntas"}>
