@@ -1,0 +1,67 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "libros":     
+  [{"id":0,
+  "nombre":"Harry Potter y la piedra filosofal",
+  "autor":"Autor1",
+  "categoria":"fantasia",
+  "imagen":"/libro-1.png",
+  "precio":2000,
+  "resumen":"libro de hechiceria adolescente mágico espiritual con un villano malote",
+  "stock": true
+  },
+
+  {"id":1,
+  "nombre":"Las palabras y las cosas",
+  "autor":"Autor2",
+  "categoria":"filosofia",
+  "imagen":"/libro-2.png",
+  "precio":3010,
+  "resumen":" Las palabras y las cosas ofrece una poderosa crítica política al modo en que el conocimiento y el poder están entrelazados en las sociedades modernas, desafiando las concepciones tradicionales de verdad, conocimiento y autoridad",
+  "stock": true
+  },
+  
+  {"id":2,
+  "nombre":"El principito",
+  "autor":"Autor3",
+  "categoria":"fantasia",
+  "imagen":"/libro-3.png",
+  "precio":7000,
+  "resumen":"  A medida que el principito relata sus encuentros con diferentes personajes en otros asteroides, el libro ofrece reflexiones sobre la naturaleza humana y la importancia de ver el mundo con los ojos del corazón.",
+  "stock": false
+  },
+  
+  {"id":3,
+  "nombre":"Vigilar y castigar",
+  "autor":"Autor2",
+  "categoria":"filosofia",
+  "imagen":"/libro-4.png",
+  "precio":3010,
+  "resumen":"Vigilar y castigar ofrece una perspectiva política provocadora sobre el funcionamiento del poder y el control en las sociedades modernas, invitando a cuestionar las instituciones y prácticas que sustentan el sistema de dominación y a reflexionar sobre las implicaciones políticas de las relaciones de poder en la vida cotidiana.",
+  "stock": false
+  },
+
+  {"id":4,
+  "nombre":"la torre oscura 1",
+  "autor":"stephen king",
+  "categoria":"fantasia",
+  "imagen":"/libro-1.png",
+  "precio":2500,
+  "resumen":"un libro que puse de prueba",
+  "stock": true
+  }]   
+  
+}

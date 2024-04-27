@@ -45,12 +45,13 @@ export const Card = ({ nombre, precio, id, imagen }) => {
   const quantityPerItem = getQuantityById(id);
 
   return (
-    <div className="item-box">
+    <div className="item-box ">
+
       {quantityPerItem > 0 && (
         <div className="item-quantity">{quantityPerItem}</div>
       )}
 
-      <div>{nombre}</div>
+      <div className="bg-warning">{nombre}</div>
       <img src={imagen} width="80" height="55" />
       <div className="item-precio">${precio}</div>
 
