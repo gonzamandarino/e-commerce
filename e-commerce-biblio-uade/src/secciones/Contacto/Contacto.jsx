@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Contacto.css'
 import ig from '/ig.png'
 import tw from '/twitter.png' 
 import fb from '/fb.png' 
@@ -93,7 +92,7 @@ return (
             <div className="p-3 col-md-5 text-black display-7 rounded-5 bg-warning ">Nuestras redes sociales</div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su Mail' name="mail" onChange={handleChange} />
+            <input className="p-2 col-md-6 text-black bg-white  " type="text" placeholder='Ingrese su Mail' name="mail" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">
@@ -104,14 +103,14 @@ return (
             </div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su Teléfono(opcional)'  name="telefono" onChange={handleChange} />
+            <input className="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su Teléfono(opcional)'  name="telefono" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">
             <div className="p-3 col-md-5 text-black display-7 rounded-5 bg-warning ">Nuestro Teléfono:</div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
-            <input class="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su mensaje' name="texto" onChange={handleChange} />
+            <input className="p-2 col-md-6 text-black bg-white " type="text" placeholder='Ingrese su mensaje' name="texto" onChange={handleChange} />
             </form></div>
         </div>
         <div className="row">

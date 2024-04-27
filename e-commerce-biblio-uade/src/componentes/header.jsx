@@ -23,15 +23,22 @@ function Header(){
                         </div>
                         <div className="col-md-6"></div>
 
-                        <div className="col-md-4 ">
-                            <Link to="/inicio-sesion">
+                        <div className="col-md-2 btn btn-lg btn-sesion   ">
+                            <div className="bg-warning rounded-2">
+                            <Link   to="/inicio-sesion">
                                 Iniciar sesión
                             </Link>
-
+                            </div>
+                    </div> 
+                    <div className="col-md-2 btn btn-lg btn-sesion  ">
+                    <div className="bg-warning rounded-2">
                             <Link to="/registro">
                                 Registro
                             </Link>
-                    </div> 
+                            </div>
+
+
+                    </div>
 
 
 
@@ -40,25 +47,58 @@ function Header(){
 
                 </div>
                 <nav className="row  text-black">
-                    <div className="col-md-1 bg-warning text-black"></div>
+                    <div className=" col-md-1 bg-warning text-black"></div>
                     <div className=" col-md-11 bg-warning d-flex justify-content-start text-black">
 
-                        <div className="btn-group btn-group-toggle position-relative text-black " >
-                            <Link to={"/"}>
+                    <div id="inicio" className=" col-md-1 text-white" >
+                    <Link to={"/"}>
                                 Inicio 
                             </Link>
-                            <Link to={"/catalogo"} >
+
+
+                    </div>
+                    <div id="catalogo" className=" col-md-1">
+                    <Link to={"/catalogo"} >
                                 Catalogo
                             </Link>
-                            <Link to={"/preguntas"}>
+
+
+                    </div>
+                    <div id="preguntas" className=" col-md-1">
+                    <Link to={"/preguntas"}>
                                 Preguntas
                             </Link>
-                            <Link to={"/contacto"}>
+
+
+
+                    </div>
+                    <div id="contacto" className=" col-md-1">
+                    <Link to={"/contacto"}>
                                 Contacto
                             </Link>
-                            <Link to={"/cart"}>
+
+
+                    </div>
+                    <div id="cart" className=" col-md-2">
+                    <Link to={"/cart"}>
                                 Cart items: <span className="cart-count">{quantity}</span>
                             </Link>
+
+
+                    </div>
+                    <div className="col-md 4"></div>
+                    <div id="mis-libros" className=" col-md-1">
+                    <Link to={"/mislibros"}>
+                                Mis libros
+                            </Link>
+                    </div>
+
+                        <div className="btn-group btn-group-toggle position-relative text-black " >
+
+
+
+
+
                         </div>
                     </div>                   
                 </nav>

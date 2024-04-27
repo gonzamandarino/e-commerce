@@ -12,10 +12,12 @@ import { ShoppingCartProvider } from './contexts/cartContext';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ListaCard from './componentes/listaCards'
 import ShoppingCart from './componentes/cart'
+import Mislibros from './secciones/mislibros/mislibros';
 
 function App() {
   const [estadoVariable, setEstadoVariable] = useState(0);
-  const [item, setItem] = useState(DATOS);
+  // const [item, setItem] = useState(DATOS);
+  
   const actualizarEstado = (nuevoEstado) => {
     setEstadoVariable(nuevoEstado);
   };
@@ -37,9 +39,7 @@ function App() {
           {/* TODO */}
           <Route path='/preguntas' element={<Inicio></Inicio>}/>
           <Route path='/contacto' element={<Contacto></Contacto>}/>
-
-
-        </Routes>
+          <Route path='/mislibros' element={<Mislibros></Mislibros>}/></Routes>
       </Router>
     </ShoppingCartProvider>
     <Footer></Footer>
