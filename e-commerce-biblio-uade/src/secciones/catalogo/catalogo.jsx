@@ -12,8 +12,7 @@ import Card from '../../componentes/card-libro';
         <h1>
         Catalogo
         </h1>
-        <Card item={item} setItem={setItem} ></Card>
-        </div>  
+       </div>  
         
         </>
       )

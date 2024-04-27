@@ -8,6 +8,10 @@ import Registro from './secciones/registro/registro';
 import Footer from './secciones/footer';
 import InicioSesion from './secciones/inicio-sesion/inicioSesion';
 import './App.css';
+import { ShoppingCartProvider } from './contexts/cartContext';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ListaCard from './componentes/listaCards'
+import ShoppingCart from './componentes/cart'
 
 function App() {
   const [estadoVariable, setEstadoVariable] = useState(0);
@@ -19,21 +23,26 @@ function App() {
 
   return (
     <>
-      <Header actualizarEstado={actualizarEstado} />
-      {estadoVariable === 0 ? (
-        <Inicio />
-      ) : estadoVariable === 1 ? (
-        <Catalogo item={item.catalogo} setItem={setItem} />
-      ) : estadoVariable === 3 ? (
-        <Contacto item={item.catalogo} setItem={setItem} />
-      ) : estadoVariable === 4 ? (
-        <Registro />
-      ) : estadoVariable === 5 ? (
-        <InicioSesion />
-      ) : (
-        <Inicio />
-      )}
-      <Footer />
+    <ShoppingCartProvider>
+      <Router>
+        <Header />
+        <Routes>
+          
+          <Route path='/inicio-sesion' element={<InicioSesion></InicioSesion>}></Route>
+          <Route path='/registro' element={<Registro></Registro>}></Route>
+
+          <Route path="/" element={<Inicio />} />
+          <Route path="/catalogo" element={<ListaCard/>}/>
+          <Route path="/cart" element={<ShoppingCart />} />
+          {/* TODO */}
+          <Route path='/preguntas' element={<Inicio></Inicio>}/>
+          <Route path='/contacto' element={<Contacto></Contacto>}/>
+
+
+        </Routes>
+      </Router>
+    </ShoppingCartProvider>
+    <Footer></Footer>
     </>
   );
 }

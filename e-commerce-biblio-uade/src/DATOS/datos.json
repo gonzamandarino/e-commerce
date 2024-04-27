@@ -1,5 +1,4 @@
-{"catalogo": [
-
+[
     {"id":0,
     "nombre":"Harry Potter y la piedra filosofal",
     "autor":"Autor1",
@@ -41,5 +40,3 @@
     }            
 
 ]
-
-}
