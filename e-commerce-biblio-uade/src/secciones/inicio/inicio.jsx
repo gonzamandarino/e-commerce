@@ -12,7 +12,7 @@ function Inicio(){
           <div className="inicio-central position-relative">
             <h2 className="text-start">Bienvenidos</h2>
             <p>El catálogo más genial de todos los catálogos <strong>geniales</strong></p>
-            <Buscador></Buscador>
+            <Buscador ></Buscador>
           </div>
         </div>
         <div className="col-md-6">

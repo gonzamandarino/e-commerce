@@ -10,31 +10,29 @@ import InicioSesion from './secciones/inicio-sesion/inicioSesion';
 import './App.css';
 import { ShoppingCartProvider } from './contexts/cartContext';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import ListaCard from './componentes/listaCards'
 import ShoppingCart from './componentes/cart'
 import Mislibros from './secciones/mislibros/mislibros';
 
 function App() {
   const [estadoVariable, setEstadoVariable] = useState(0);
-  // const [item, setItem] = useState(DATOS);
   
-  const actualizarEstado = (nuevoEstado) => {
-    setEstadoVariable(nuevoEstado);
-  };
-  const [count, setCount] = useState(0);
+
+  
 
   return (
     <>
+
     <ShoppingCartProvider>
       <Router>
         <Header />
         <Routes>
-          
           <Route path='/inicio-sesion' element={<InicioSesion></InicioSesion>}></Route>
           <Route path='/registro' element={<Registro></Registro>}></Route>
 
           <Route path="/" element={<Inicio />} />
-          <Route path="/catalogo" element={<ListaCard/>}/>
+          <Route path="/catalogo" element={<ListaCard />}/>
           <Route path="/cart" element={<ShoppingCart />} />
           {/* TODO */}
           <Route path='/preguntas' element={<Inicio></Inicio>}/>

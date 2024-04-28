@@ -1,40 +1,32 @@
 import React, { useEffect, useState } from "react";
-import storeItems from "../DATOS/datos.json"
+
+import getLibros from "../service/getLibros"
 import { Card } from "./card-libro";
 
 const ListaCard = () => {
+    const [libros,setLibros]=useState([])
 
-
-
-
-
-    const [libros,setLibros] = useState([]);
-
-    useEffect(  ()=>{
-        fetch("http://localhost:3000/libros") .then((response) => response.json()) .then((data) => setLibros(data))
-
-        console.log("aca te los imprimi")
-         console.log(libros)
-
-
-    }, [])
+    useEffect(() => {
+        getLibros().then((data) => {
+            setLibros(data);
+        });
+    }, []);
 
 
     return (
-        
 
-    
-
-
-        <div className="items-list ">
-
-        {libros.map((product, idx) => {
-
-            return <Card key={product.id} {...product} />;
-
-        })}
+        <div className="container-fluid">
+        <div className="row justify-content-center">
+          {libros.map((product) => (
+            <div className="col-md-4 col-sm-6 mb-3" key={product.id}>
+            <div className="card my-3 py-3 border-0">
+              <Card {...product} />
+            </div>
+          </div>
+          ))}
         </div>
-    );
+      </div>
+          );
 };
 
 export default ListaCard

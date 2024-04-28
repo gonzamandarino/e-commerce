@@ -45,7 +45,7 @@ export const Card = ({ nombre, precio, id, imagen }) => {
   const quantityPerItem = getQuantityById(id);
 
   return (
-    <div className="item-box ">
+   /*  <div className="item-box ">
 
       {quantityPerItem > 0 && (
         <div className="item-quantity">{quantityPerItem}</div>
@@ -70,6 +70,33 @@ export const Card = ({ nombre, precio, id, imagen }) => {
           Sacar
         </Button>
       )}
+    </div> */
+      <>
+      
+      <div className="card-img-top text-center">
+      <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
+      <div className="card-body">
+        <div className="card-price">${precio}</div>
+        <div className="card-title fw-bold fs-4">{nombre}</div>
+
+        {quantityPerItem === 0 ? (
+          <Button variant="outlined" className="item-add-Button" onClick={addToCart}>
+            Agregar
+          </Button>
+        ) : (
+          <Button variant="outlined" className="item-plus-Button" onClick={addToCart}>
+            Agregar
+          </Button>
+        )}
+
+        {quantityPerItem > 0 && (
+          <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
+            Sacar
+          </Button>
+        )}
+      </div>
     </div>
+      </>
+
   );
 };
