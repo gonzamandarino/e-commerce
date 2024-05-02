@@ -10,7 +10,7 @@ import InicioSesion from './secciones/inicio-sesion/inicioSesion';
 import './App.css';
 import { ShoppingCartProvider } from './contexts/cartContext';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import DetalleLibro from './componentes/DetalleLibro';
 import ListaCard from './componentes/listaCards'
 import ShoppingCart from './componentes/cart'
 import Mislibros from './secciones/mislibros/mislibros';
@@ -32,7 +32,10 @@ function App() {
           <Route path='/registro' element={<Registro></Registro>}></Route>
 
           <Route path="/" element={<Inicio />} />
-          <Route path="/catalogo" element={<ListaCard />}/>
+          <Route path="/catalogo" element={<ListaCard />}>
+            <Route path=':DetalleLibro' element={<DetalleLibro></DetalleLibro>}/>
+          </Route>
+          
           <Route path="/cart" element={<ShoppingCart />} />
           {/* TODO */}
           <Route path='/preguntas' element={<Inicio></Inicio>}/>

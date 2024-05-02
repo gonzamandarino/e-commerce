@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { CartContext } from "../contexts/cartContext";
 import {Button} from '@mui/material';
+import { Outlet,useLocation } from "react-router-dom";
+
 
 export const Card = ({ nombre, precio, id, imagen }) => {
   const [cart, setCart] = useContext(CartContext);
@@ -44,6 +46,8 @@ export const Card = ({ nombre, precio, id, imagen }) => {
 
   const quantityPerItem = getQuantityById(id);
 
+
+
   return (
    /*  <div className="item-box ">
 
@@ -78,7 +82,6 @@ export const Card = ({ nombre, precio, id, imagen }) => {
       <div className="card-body">
         <div className="card-price">${precio}</div>
         <div className="card-title fw-bold fs-4">{nombre}</div>
-
         {quantityPerItem === 0 ? (
           <Button variant="outlined" className="item-add-Button" onClick={addToCart}>
             Agregar
@@ -93,9 +96,15 @@ export const Card = ({ nombre, precio, id, imagen }) => {
           <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
             Sacar
           </Button>
+          
         )}
+
+
+        
       </div>
+      
     </div>
+    
       </>
 
   );
