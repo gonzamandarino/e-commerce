@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import getLibros from "../service/getLibros";
-
+import { Link } from "react-router-dom";
 
 function Buscador() {
     const [catalogo, setCatalogo] = useState([]);
