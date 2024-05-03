@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 
 export  const DetalleLibro = () =>{
@@ -31,9 +32,9 @@ export  const DetalleLibro = () =>{
 
     return (
 
-        <Card sx={{ maxWidth: 800 }}>
+        <Card sx={{ maxWidth: 600 }}>
             <CardMedia
-                sx={{ height: 600 }}
+                sx={{ height: 400 }}
                 image={libros.imagen}
             />
             <CardContent>
@@ -45,9 +46,9 @@ export  const DetalleLibro = () =>{
                 {libros.resumen}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions style={{justifyContent: 'center'}}>
                 <Link to="/catalogo">
-                    <Button size="small">Cerrar</Button>
+                    <Button size="small" variant="contained">Cerrar</Button>
                 </Link>
             </CardActions>
         </Card>
