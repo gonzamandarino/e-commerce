@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { CartContext } from "../contexts/cartContext";
 import {Button} from '@mui/material';
+import { Outlet,useLocation, Link } from "react-router-dom";
+
+
 
 export const Card = ({ nombre, precio, id, imagen }) => {
   const [cart, setCart] = useContext(CartContext);
@@ -44,41 +47,19 @@ export const Card = ({ nombre, precio, id, imagen }) => {
 
   const quantityPerItem = getQuantityById(id);
 
+
+
   return (
-   /*  <div className="item-box ">
 
-      {quantityPerItem > 0 && (
-        <div className="item-quantity">{quantityPerItem}</div>
-      )}
-
-      <div className="bg-warning">{nombre}</div>
-      <img src={imagen} width="80" height="55" />
-      <div className="item-precio">${precio}</div>
-
-      {quantityPerItem === 0 ? (
-        <Button variant="outlined" className="item-add-Button" onClick={() => addToCart()}>
-          Agregar
-        </Button>
-      ) : (
-        <Button  variant="outlined" className="item-plus-Button" onClick={() => addToCart()}>
-          Agregar
-        </Button>
-      )}
-
-      {quantityPerItem > 0 && (
-        <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
-          Sacar
-        </Button>
-      )}
-    </div> */
       <>
       
       <div className="card-img-top text-center">
-      <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
+        <Link to={'/catalogo/' + id}>
+          <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
+        </Link>
       <div className="card-body">
         <div className="card-price">${precio}</div>
         <div className="card-title fw-bold fs-4">{nombre}</div>
-
         {quantityPerItem === 0 ? (
           <Button variant="outlined" className="item-add-Button" onClick={addToCart}>
             Agregar
@@ -93,9 +74,15 @@ export const Card = ({ nombre, precio, id, imagen }) => {
           <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
             Sacar
           </Button>
+          
         )}
+
+
+        
       </div>
+      
     </div>
+    
       </>
 
   );

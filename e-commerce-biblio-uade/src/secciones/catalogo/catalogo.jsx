@@ -1,5 +1,6 @@
 import React from 'react';
 import DATOS from '../../DATOS/datos.json';
+import { Outlet } from 'react-router-dom';
 
 
     
@@ -11,8 +12,12 @@ import DATOS from '../../DATOS/datos.json';
         <div>
         <h1>
         Catalogo
+        
         </h1>
+
        </div>  
+
+       
         
         </>
       )

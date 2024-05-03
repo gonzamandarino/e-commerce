@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ig from '/ig.png'
 import tw from '/twitter.png' 
-import fb from '/fb.png' 
+import fb from '/fb.png'
+import github from '/github-logo.png'
 
 
     
@@ -100,6 +101,7 @@ return (
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"><img className="col-md-1" src={ig} alt="instagram logo" href="www.youtube.com" /></a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"><img className="col-md-1 rounded-3" src={tw} alt="twitter logo" href="www.youtube.com" /></a>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"><img className="col-md-1 rounded-3 " src={fb} alt="facebook logo" href="www.youtube.com" /></a>
+                <a href="https://github.com/gonzamandarino/e-commerce"><img className="col-md-1 rounded-3 " src={github} alt="facebook logo" href="link al repositorio" /></a>
             </div>
             <div className="col-md-2"></div>
             <div className="p-2 col-md-5 bg-warning">            <form onSubmit={(e) => e.preventDefault()}> 
