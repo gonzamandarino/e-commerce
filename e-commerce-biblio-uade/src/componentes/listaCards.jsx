@@ -20,8 +20,8 @@ const ListaCard = () => {
 
 
     return (
-      
-        <div className="container-fluid">
+      <div className="container-fluid">
+          <Outlet></Outlet>
         <div className="row justify-content-center">
           
           {libros.map((product) => (
@@ -38,7 +38,7 @@ const ListaCard = () => {
       
         
       
-          );
+    );
           
 };
 
