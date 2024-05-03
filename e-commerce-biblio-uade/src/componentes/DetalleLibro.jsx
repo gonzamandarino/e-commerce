@@ -17,8 +17,7 @@ export  const DetalleLibro = () =>{
     const numero = cadena.substring(indice);
     const [libros,setLibros]=useState([])
     const location = useLocation();
-    console.log(numero);
-    console.log(location.pathname);
+   
 
 
     let { id } = useParams();

@@ -53,9 +53,6 @@ if(datoContacto.texto.trim()===""){
     return;
 }
 
-console.log(datoContacto)
-
-
             }
 
 

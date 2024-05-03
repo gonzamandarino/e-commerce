@@ -3,7 +3,7 @@ return(
 <div className="container">
 
 <div className="row bg-warning">
-<div classname="col-md-12 bg-warning">pagina en proceso</div>
+<div className="col-md-12 bg-warning">pagina en proceso</div>
 </div>
 </div>
 

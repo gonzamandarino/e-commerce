@@ -47,8 +47,7 @@ function Registro() {
     setErrores(newErrores);
 
     if (Object.values(newErrores).every(error => error === "")) {
-      console.log(usuario);
-      // Aquí puedes enviar los datos a tu backend o realizar cualquier otra acción que necesites.
+
     }
   };
 

@@ -17,8 +17,7 @@ function InicioSesion(){
     
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(usuario);
-        // Aquí puedes enviar los datos a tu backend o realizar cualquier otra acción que necesites.
+
       };
 
       const recuperUsuario=()=>{
