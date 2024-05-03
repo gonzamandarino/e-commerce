@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import Header from './componentes/header';
 import Inicio from './secciones/inicio/inicio';
-import Catalogo from './secciones/catalogo/catalogo';
 import Contacto from './secciones/Contacto/Contacto';
-import DATOS from './DATOS/datos.json';
 import Registro from './secciones/registro/registro';
 import Footer from './secciones/footer';
 import InicioSesion from './secciones/inicio-sesion/inicioSesion';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import getLibros from "../service/getLibros"
 import { Card } from "./card-libro";
-import { Outlet,useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const ListaCard = () => {
     const [libros,setLibros]=useState([])
@@ -21,7 +21,9 @@ const ListaCard = () => {
 
     return (
       <div className="container-fluid">
-          <Outlet></Outlet>
+          <div className="row justify-content-center">
+            <Outlet></Outlet>
+          </div>
         <div className="row justify-content-center">
           
           {libros.map((product) => (
