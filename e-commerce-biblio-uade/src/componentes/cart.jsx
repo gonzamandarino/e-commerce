@@ -53,16 +53,6 @@ const ShoppingCart = () => {
               <div>Items en el carrito: {quantity}</div>
               <div>Total: ${totalPrice}</div>
               <button onClick={handleCheckout} className="btn btn-warning">Checkout</button>
-              <div>
-                {cart.map(item => (
-                  <div key={item.productId}>
-                    <p>{item.productName}</p>
-                    <p>Cantidad: {item.quantity}</p>
-                    <p>Precio por item: ${item.precio}</p>
-                    <p>Stock disponible: {item.stock}</p> {/* Mostrar la información de stock */}
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
