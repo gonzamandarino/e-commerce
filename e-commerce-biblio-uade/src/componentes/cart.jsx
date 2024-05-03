@@ -50,16 +50,16 @@ const ShoppingCart = () => {
             )}
             <div>
               <h1 className="text-center">Carrito de compras</h1>
-              <div>Items in cart: {quantity}</div>
+              <div>Items en el carrito: {quantity}</div>
               <div>Total: ${totalPrice}</div>
               <button onClick={handleCheckout} className="btn btn-warning">Checkout</button>
               <div>
                 {cart.map(item => (
                   <div key={item.productId}>
                     <p>{item.productName}</p>
-                    <p>Quantity: {item.quantity}</p>
-                    <p>Price per item: ${item.precio}</p>
-                    <p>Stock available: {item.stock}</p> {/* Mostrar la información de stock */}
+                    <p>Cantidad: {item.quantity}</p>
+                    <p>Precio por item: ${item.precio}</p>
+                    <p>Stock disponible: {item.stock}</p> {/* Mostrar la información de stock */}
                   </div>
                 ))}
               </div>
