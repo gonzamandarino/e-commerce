@@ -45,17 +45,11 @@ function Buscador() {
                 
                 {opcionesFiltradas.map((libro, index) => (
 
-
-
-                    
-                    
-                    
-                    <p  key={index}> {libro.nombre} </p> 
-
-
+                <Link to={`/catalogo/${libro.id}`} key={index} className="text-white">
+                    <p  key={index}> {libro.nombre} </p>
+                    </Link>     
     
                 ))
-                
                 
                 }
 

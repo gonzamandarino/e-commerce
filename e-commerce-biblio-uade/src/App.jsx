@@ -38,7 +38,6 @@ function App() {
           
           <Route path="/cart" element={<ShoppingCart />} />
           {/* TODO */}
-          <Route path='/preguntas' element={<Inicio></Inicio>}/>
           <Route path='/contacto' element={<Contacto></Contacto>}/>
           <Route path='/mislibros' element={<Mislibros></Mislibros>}/></Routes>
       </Router>

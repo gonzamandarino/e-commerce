@@ -37,32 +37,37 @@ const ShoppingCart = () => {
 
     // Renderizar el componente ShoppingCart
     return (
-        <div className="cart-container">
+        <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-4 cart-container">
             {/* Mostrar la alerta solo si showAlert es true */}
             {showAlert && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    ¡Compra realizada con éxito!
-                    {/* Botón para cerrar la alerta */}
-                    <button type="button" className="btn-close" onClick={() => setShowAlert(false)}></button>
-                </div>
+              <div className="alert alert-success alert-dismissible fade show" role="alert">
+                ¡Compra realizada con éxito!
+                {/* Botón para cerrar la alerta */}
+                <button type="button" className="btn-close" onClick={() => setShowAlert(false)}></button>
+              </div>
             )}
             <div>
-                <h2>Carrito de compras</h2>
-                <div>Items in cart: {quantity}</div>
-                <div>Total: ${totalPrice}</div>
-                <button onClick={handleCheckout} className="btn btn-warning ">Checkout</button>
-                <div>
-                    {cart.map(item => (
-                        <div key={item.productId}>
-                            <p>{item.productName}</p>
-                            <p>Quantity: {item.quantity}</p>
-                            <p>Price per item: ${item.precio}</p>
-                            <p>Stock available: {item.stock}</p> {/* Mostrar la información de stock */}
-                        </div>
-                    ))}
-                </div>
+              <h1 className="text-center">Carrito de compras</h1>
+              <div>Items in cart: {quantity}</div>
+              <div>Total: ${totalPrice}</div>
+              <button onClick={handleCheckout} className="btn btn-warning">Checkout</button>
+              <div>
+                {cart.map(item => (
+                  <div key={item.productId}>
+                    <p>{item.productName}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Price per item: ${item.precio}</p>
+                    <p>Stock available: {item.stock}</p> {/* Mostrar la información de stock */}
+                  </div>
+                ))}
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      
     );
 };
 

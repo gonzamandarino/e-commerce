@@ -64,14 +64,7 @@ function Header(){
 
 
                     </div>
-                    <div id="preguntas" className=" col-md-1">
-                    <Link to={"/preguntas"}>
-                                Preguntas
-                            </Link>
 
-
-
-                    </div>
                     <div id="contacto" className=" col-md-1">
                     <Link to={"/contacto"}>
                                 Contacto
