@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import getLibros from "../service/getLibros";
+import { Link } from "react-router-dom";
 
 function Buscador() {
     const [catalogo, setCatalogo] = useState([]);
@@ -40,10 +41,25 @@ function Buscador() {
                 />
             </div>
             <div>
+
+                
                 {opcionesFiltradas.map((libro, index) => (
-                    // hay que cambiar el p por un link al detalle del objeto
-                    <p key={index}>{libro.nombre}</p> 
-                ))}
+
+
+
+                    
+                    
+                    
+                    <p  key={index}> {libro.nombre} </p> 
+
+
+    
+                ))
+                
+                
+                }
+
+                
             </div>
         </>
     );

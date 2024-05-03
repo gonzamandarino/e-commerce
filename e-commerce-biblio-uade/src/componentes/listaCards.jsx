@@ -13,7 +13,7 @@ const ListaCard = () => {
         });
     }, []);
 
-    const [showView1, setShowView1] = useState(true);
+    
 
 
 

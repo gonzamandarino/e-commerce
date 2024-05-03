@@ -25,11 +25,12 @@ export  const DetalleLibro = () =>{
         getLibrosxId(id).then((data) => {
             setLibros(data);
         });
-    }, []);
+    }, [id]);
 
 
 
     return (
+
         <Card sx={{ maxWidth: 800 }}>
             <CardMedia
                 sx={{ height: 600 }}
