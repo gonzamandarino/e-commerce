@@ -43,7 +43,7 @@ function Registro() {
     } else {
       newErrores.contrasena = "";
     }
-
+    console.log(usuario)
     setErrores(newErrores);
 
     if (Object.values(newErrores).every(error => error === "")) {

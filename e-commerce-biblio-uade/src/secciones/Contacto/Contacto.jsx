@@ -8,10 +8,6 @@ import github from '/github-logo.png'
     
     function Contacto() {
 
-
-
-
-
         const [datoContacto,setDatoContacto] = useState({
             nombre:"" ,
             mail:"" ,
@@ -52,7 +48,7 @@ if(datoContacto.texto.trim()===""){
     alert("Por favor, ingrese un mensaje")
     return;
 }
-
+console.log(datoContacto)
             }
 
 
