@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/cartContext";
+import logoLibros from '/logoLibros.png'
 
 function Header(){ 
     const [cart, setCart] = useContext(CartContext);
@@ -16,7 +17,7 @@ function Header(){
             <header className="container-fluid">
                 <div className="row">
                 <div className="col-md-2 position-relative" >
-                            <img src={viteLogo} className="logo " alt="Vite logo" />
+                            <img src={logoLibros} className="logo " alt="Vite logo" />
                         <Link to="/">
                             <h1>BIBLIO UADE</h1>
                         </Link>
@@ -35,7 +36,7 @@ function Header(){
                             <Link to="/registro">
                                 Registro
                             </Link>
-                            </div>
+                    </div>
 
 
                     </div>
@@ -64,7 +65,6 @@ function Header(){
 
 
                     </div>
-
                     <div id="contacto" className=" col-md-1">
                     <Link to={"/contacto"}>
                                 Contacto
