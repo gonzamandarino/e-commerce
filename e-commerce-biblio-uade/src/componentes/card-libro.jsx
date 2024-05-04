@@ -14,13 +14,13 @@ export const Card = ({ nombre, precio, id, imagen }) => {
       if (isItemsFound) {
         return currItems.map((item) => {
           if (item.id === id) {
-            return { ...item, quantity: item.quantity + 1 };
+            return { ...item, quantity: item.quantity + 1, nombre };
           } else {
             return item;
           }
         });
       } else {
-        return [...currItems, { id, quantity: 1, precio }];
+        return [...currItems, { id, quantity: 1, precio,nombre }];
       }
     });
   };

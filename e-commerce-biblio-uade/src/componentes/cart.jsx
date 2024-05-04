@@ -48,11 +48,35 @@ const ShoppingCart = () => {
                 <button type="button" className="btn-close" onClick={() => setShowAlert(false)}></button>
               </div>
             )}
-            <div>
-              <h1 className="text-center">Carrito de compras</h1>
+            <div className="bg-warning">
+              <h1 className="text-center text-black ">Carrito de compras</h1>
               <div>Items en el carrito: {quantity}</div>
               <div>Total: ${totalPrice}</div>
               <button onClick={handleCheckout} className="btn btn-warning">Checkout</button>
+
+              <div>
+
+                {cart.map(item=>(
+
+                  <div className="div" key={item.productId}>
+                    <p>Nombre:{item.nombre}</p>
+                    <p>Cantidad: {item.quantity}</p>
+                    <p>Precio por item: ${item.precio}</p>
+                    
+
+
+
+
+
+
+                  </div>
+
+                ))}
+
+
+
+
+              </div>
             </div>
           </div>
         </div>
