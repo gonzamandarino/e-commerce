@@ -48,7 +48,7 @@ const ShoppingCart = () => {
                 <button type="button" className="btn-close" onClick={() => setShowAlert(false)}></button>
               </div>
             )}
-            <div className="bg-warning">
+            <div className="bg-warning rounded-5">
               <h1 className="text-center text-black ">Carrito de compras</h1>
               <div>Items en el carrito: {quantity}</div>
               <div>Total: ${totalPrice}</div>
