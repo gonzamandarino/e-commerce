@@ -4,6 +4,10 @@ import Inicio from './secciones/inicio/inicio';
 import Contacto from './secciones/Contacto/Contacto';
 import Registro from './secciones/registro/registro';
 import Footer from './secciones/footer';
+import Filtros from './componentes/filtros';
+import NavFiltros from './componentes/NavFiltros';
+import ListaPorAutor from './componentes/listaPorAutor';
+import ListaPorCategoria from './componentes/listaPorCategoria';
 import InicioSesion from './secciones/inicio-sesion/inicioSesion';
 import './App.css';
 import { ShoppingCartProvider } from './contexts/cartContext';
@@ -25,17 +29,24 @@ function App() {
     <ShoppingCartProvider>
       <Router>
         <Header />
+        <NavFiltros></NavFiltros>
+
+
+
         <Routes>
-          <Route path='/inicio-sesion' element={<InicioSesion></InicioSesion>}></Route>
+          <Route path='/inicio-sesion' filter="none" element={<InicioSesion></InicioSesion>}></Route>
           <Route path='/registro' element={<Registro></Registro>}></Route>
 
           <Route path="/" element={<Inicio />} />
           <Route path="/catalogo" element={<ListaCard />}>
-            <Route path=':id' element={<DetalleLibro></DetalleLibro>}/>
+            <Route path='categoria/:categoria' element={<ListaPorCategoria />} />
+            <Route path='autores/:autor'  element={<ListaPorAutor />} />
+            <Route path='libro/:id' element={<DetalleLibro />} />
+           
           </Route>
           
           <Route path="/cart" element={<ShoppingCart />} />
-          {/* TODO */}
+    
           <Route path='/contacto' element={<Contacto></Contacto>}/>
           <Route path='/mislibros' element={<Mislibros></Mislibros>}/></Routes>
       </Router>

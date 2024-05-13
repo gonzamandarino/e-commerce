@@ -16,6 +16,7 @@
     "@mui/x-data-grid": "^7.3.0",
     "bootstrap": "^5.3.3",
     "json-server": "^0.17.4",
+    "popper": "^1.0.1",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-router-dom": "^6.23.0"

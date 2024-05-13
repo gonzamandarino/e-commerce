@@ -54,7 +54,7 @@ export const Card = ({ nombre, precio, id, imagen }) => {
       <>
       
       <div className="card-img-top text-center">
-        <Link to={'/catalogo/' + id}>
+        <Link to={'/catalogo/libro/' + id}>
           <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
         </Link>
       <div className="card-body">
