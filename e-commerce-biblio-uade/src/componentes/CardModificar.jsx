@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useContext, useState } from "react";
-import { CartContext } from "../contexts/cartContext";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button } from '@mui/material';
-import { Link } from "react-router-dom";
-import ModificarLibroDialog from './ModificarLibroDialog'; // Asegúrate de que la ruta es correcta
+import ModificarLibroDialog from './ModificarLibroDialog';
+import { deleteLibro } from "../features/libros/librosSlice";
 
-    export const CardMod = ({ nombre, precio, id, imagen }) => {
-    const [cart, setCart] = useContext(CartContext);
+export const CardMod = ({ nombre, precio, id, imagen }) => {
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         nombre,
@@ -30,15 +30,14 @@ import ModificarLibroDialog from './ModificarLibroDialog'; // Asegúrate de que 
         });
     };
 
-    //TODO Poner para que se guarde en la bd y se borre en la bd
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
         handleClose();
     };
 
-    const deleteItem = (id) => {
-        console.log(`Eliminar libro con id: ${id}`);
+    const handleDelete = () => {
+        dispatch(deleteLibro(id));
     };
 
     return (
@@ -51,7 +50,7 @@ import ModificarLibroDialog from './ModificarLibroDialog'; // Asegúrate de que 
             <Button variant="outlined" className="item-modify-Button" onClick={handleClickOpen}>
                 Modificar
             </Button>
-            <Button variant="outlined" className="item-delete-Button" onClick={() => deleteItem(id)}>
+            <Button variant="outlined" className="item-delete-Button" onClick={handleDelete}>
                 Borrar
             </Button>
             </div>
@@ -67,3 +66,5 @@ import ModificarLibroDialog from './ModificarLibroDialog'; // Asegúrate de que 
         </>
     );
 };
+
+export default CardMod;

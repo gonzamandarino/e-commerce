@@ -1,32 +1,30 @@
-import  { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import AgregarLibroDialog from '../../componentes/AgregarLibroDialog';
-import getLibros from '../../service/getLibros';
+import { fetchLibros } from '../../features/libros/librosSlice';
 import { CardMod } from '../../componentes/CardModificar';
 
+function MisLibros() {
+    const dispatch = useDispatch();
+    const libros = useSelector((state) => state.libros.items);
+    const libroStatus = useSelector((state) => state.libros.status);
+    const error = useSelector((state) => state.libros.error);
 
-
-    function MisLibros() {
-
-
-    // TODO Filtrar libros q sean de este usuario
-    const [libros,setLibros]=useState([])
-
-    useEffect(() => {
-        getLibros().then((data) => {
-            setLibros(data);
-        });
-    }, []);
-    
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         titulo: '',
         autor: '',
         descripcion: '',
         imagen: null,
-        precio: ''
+        precio: '',
     });
 
+    useEffect(() => {
+        if (libroStatus === 'idle') {
+        dispatch(fetchLibros());
+        }
+    }, [libroStatus, dispatch]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,18 +38,17 @@ import { CardMod } from '../../componentes/CardModificar';
         const { name, value } = e.target;
         setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
         });
     };
 
     const handleFileChange = (e) => {
         setFormData({
         ...formData,
-        imagen: e.target.files[0]
+        imagen: e.target.files[0],
         });
     };
 
-    // TODO - Agregar el libro en la BD
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
@@ -60,11 +57,10 @@ import { CardMod } from '../../componentes/CardModificar';
 
     return (
         <div className="container">
-        
-        <div >
-        <h1>Mis Libros  </h1>    
+        <div>
+            <h1>Mis Libros</h1>
         </div>
-        
+
         <div className="row bg-warning">
             <Button className="item-plus-Button" onClick={handleClickOpen}>
             + Agregar Libro
@@ -72,13 +68,19 @@ import { CardMod } from '../../componentes/CardModificar';
         </div>
 
         <div className="row justify-content-center">
-            {libros.map((product) => (
-            <div className="col-md-4 col-sm-6 mb-3" key={product.id}>
+            {libroStatus === 'loading' && <p>Loading...</p>}
+            {libroStatus === 'failed' && <p>{error}</p>}
+            {libroStatus === 'succeeded' && libros.length > 0 ? (
+            libros.map((product) => (
+                <div className="col-md-4 col-sm-6 mb-3" key={product.id}>
                 <div className="card my-3 py-3 border-0">
-                <CardMod {...product} />
+                    <CardMod {...product} />
                 </div>
-            </div>
-            ))}
+                </div>
+            ))
+            ) : (
+            <p>No hay libros disponibles</p>
+            )}
         </div>
 
         <AgregarLibroDialog
@@ -91,6 +93,6 @@ import { CardMod } from '../../componentes/CardModificar';
         />
         </div>
     );
-    }
+}
 
 export default MisLibros;

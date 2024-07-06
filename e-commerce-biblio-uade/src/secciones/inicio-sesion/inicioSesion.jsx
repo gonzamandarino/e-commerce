@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+// src/components/InicioSesion.js
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { authenticateUser } from '../../service/authService';
+import { setToken } from '../../features/auth/authSlice';
 
 function InicioSesion() {
   const [usuario, setUsuario] = useState({
@@ -11,6 +15,8 @@ function InicioSesion() {
     contrasena: ''
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUsuario({
@@ -19,7 +25,7 @@ function InicioSesion() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let newErrores = { ...errores };
@@ -39,7 +45,13 @@ function InicioSesion() {
     setErrores(newErrores);
 
     if (Object.values(newErrores).every(error => error === "")) {
-      // Agregar la lógica para el inicio de sesión
+      try {
+        const token = await authenticateUser(usuario.nombre, usuario.contrasena);
+        dispatch(setToken(token));
+        console.log('Autenticación exitosa');
+      } catch (error) {
+        console.error('Error de autenticación:', error);
+      }
     }
   };
 
