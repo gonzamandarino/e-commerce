@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../features/auth/authSlice';
 
 function Registro() {
+  const dispatch = useDispatch();
+
   const [usuario, setUsuario] = useState({
     nombre: '',
     email: '',
@@ -43,11 +47,20 @@ function Registro() {
     } else {
       newErrores.contrasena = "";
     }
-    console.log(usuario)
+
     setErrores(newErrores);
 
     if (Object.values(newErrores).every(error => error === "")) {
-
+      // Realizar el registro con Redux
+      dispatch(registerUser({ nombre: usuario.nombre, pass: usuario.contrasena, role: 'USER' }))
+        .then(() => {
+          alert("Te has registrado con exito!");
+          console.log('Registro exitoso!');
+        })
+        .catch(error => {
+          console.error('Error durante el registro:', error);
+          alert("Error: ",error);
+        });
     }
   };
 

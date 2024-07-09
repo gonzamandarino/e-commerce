@@ -1,6 +1,4 @@
-import { DATA_GRID_PROPS_DEFAULT_VALUES } from "@mui/x-data-grid";
 import Buscador from "../../componentes/buscador";
-import personaje from'/personaje-inicio.svg';
 import HomeCarousel from "../../componentes/HomeCarousel";
 
 

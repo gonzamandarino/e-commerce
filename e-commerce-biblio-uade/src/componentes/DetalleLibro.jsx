@@ -1,56 +1,56 @@
-import { useParams,useLocation, Link } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import getLibrosxId from "../service/getLibrosxId"
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getLibroByID } from "../features/libros/librosSlice";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 
+export const DetalleLibro = ({ open, handleClose, libroId }) => {
+  const dispatch = useDispatch();
+  const libro = useSelector((state) => state.libros.selectedLibro);
 
-export  const DetalleLibro = () =>{
+  useEffect(() => {
+    if (open) {
+      dispatch(getLibroByID(libroId));
+    }
+  }, [dispatch, libroId, open]);
 
-    const cadena = "/catalogo/1";
-    const indice = "/catalogo/".length;
-    const numero = cadena.substring(indice);
-    const [libros,setLibros]=useState([])
-    const location = useLocation();
-   
+  return (
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <DialogTitle>{libro?.nombre} - {libro?.autor}</DialogTitle>
+      <DialogContent>
+        <CardMedia
+          component="img"
+          height="400"
+          image={libro?.imagen}
+          alt={libro?.nombre}
+        />
+        <DialogContentText>
+          <Typography variant="h6" component="div" gutterBottom>
+            Precio: ${libro?.precio}
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            {libro?.resumen}
+          </Typography>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions style={{ justifyContent: 'center' }}>
+        <Button size="small" variant="contained" onClick={handleClose}>Cerrar</Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
+DetalleLibro.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  libroId: PropTypes.string.isRequired,
+};
 
-    let { id } = useParams();
-    useEffect(() => {
-        getLibrosxId(id).then((data) => {
-            setLibros(data);
-        });
-    }, [id]);
-
-
-
-    return (
-
-        <Card sx={{ maxWidth: 600 }}>
-            <CardMedia
-                sx={{ height: 400 }}
-                image={libros.imagen}
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                {libros.nombre} - {libros.autor}
-                </Typography>
-                ${libros.precio}
-                <Typography variant="body2" color="text.secondary">
-                {libros.resumen}
-                </Typography>
-            </CardContent>
-            <CardActions style={{justifyContent: 'center'}}>
-                <Link to="/catalogo">
-                    <Button size="small" variant="contained">Cerrar</Button>
-                </Link>
-            </CardActions>
-        </Card>
-    );
-}
-export default DetalleLibro
+export default DetalleLibro;

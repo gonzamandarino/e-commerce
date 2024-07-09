@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../contexts/cartContext";
-import {Button} from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from "react-router-dom";
-
-
+import DetalleLibro from './DetalleLibro';
 
 export const Card = ({ nombre, precio, id, imagen }) => {
   const [cart, setCart] = useContext(CartContext);
+  const [open, setOpen] = useState(false);
 
   const addToCart = () => {
     setCart((currItems) => {
@@ -20,7 +20,7 @@ export const Card = ({ nombre, precio, id, imagen }) => {
           }
         });
       } else {
-        return [...currItems, { id, quantity: 1, precio,nombre }];
+        return [...currItems, { id, quantity: 1, precio, nombre }];
       }
     });
   };
@@ -47,43 +47,48 @@ export const Card = ({ nombre, precio, id, imagen }) => {
 
   const quantityPerItem = getQuantityById(id);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-
-      <>
-      
+    <>
       <div className="card-img-top text-center">
-        <Link to={'/catalogo/' + id}>
-          <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
-        </Link>
-      <div className="card-body">
-        <div className="card-price">${precio}</div>
-        <div className="card-title fw-bold fs-4">{nombre}</div>
-        {quantityPerItem === 0 ? (
-          <Button variant="outlined" className="item-add-Button" onClick={addToCart}>
-            Agregar
-          </Button>
-        ) : (
-          <Button variant="outlined" className="item-plus-Button" onClick={addToCart}>
-            Agregar
-          </Button>
-        )}
-
-        {quantityPerItem > 0 && (
-          <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
-            Sacar
-          </Button>
-          
-        )}
-
-
-        
+        <img
+          src={imagen}
+          alt={nombre}
+          className="photo w-75"
+          width={"25%"}
+          height={"150px"}
+          onClick={handleOpen}
+          style={{ cursor: 'pointer' }}
+        />
+        <div className="card-body">
+          <div className="card-price">${precio}</div>
+          <div className="card-title fw-bold fs-4">{nombre}</div>
+          {quantityPerItem === 0 ? (
+            <Button variant="outlined" className="item-add-Button" onClick={addToCart}>
+              Agregar
+            </Button>
+          ) : (
+            <Button variant="outlined" className="item-plus-Button" onClick={addToCart}>
+              Agregar
+            </Button>
+          )}
+          {quantityPerItem > 0 && (
+            <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
+              Sacar
+            </Button>
+          )}
+        </div>
       </div>
-      
-    </div>
-    
-      </>
-
+      <DetalleLibro open={open} handleClose={handleClose} libroId={id} />
+    </>
   );
 };
+
+export default Card;

@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
-import getLibros from "../service/getLibros";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchLibros } from '../features/libros/librosSlice';
 
 function Buscador() {
-    const [catalogo, setCatalogo] = useState([]);
-    const [busqueda, setBusqueda] = useState("");
+    const dispatch = useDispatch();
+    const catalogo = useSelector((state) => state.libros.items); // Obtén los libros del estado de Redux
+    const [busqueda, setBusqueda] = useState('');
     const [opcionesFiltradas, setOpcionesFiltradas] = useState([]);
 
     useEffect(() => {
-        getLibros().then((data) => setCatalogo(data));
-    }, []);
+        dispatch(fetchLibros()); // Despacha la acción para obtener los libros
+    }, [dispatch]);
 
-        useEffect(()=>{
-            if (busqueda.trim() !== '') { // Verifica si la búsqueda no está vacía
-                const filtro = catalogo.filter(libro =>
-                    libro.nombre.toLowerCase().includes(busqueda.toLowerCase())
-                );
-                setOpcionesFiltradas(filtro);
-            } else {
-                setOpcionesFiltradas([]); 
-            }
-        
-        },[busqueda,catalogo])
-   
-   
-        const handleChange = (e) => {
+    useEffect(() => {
+        if (busqueda.trim() !== '') { // Verifica si la búsqueda no está vacía
+            const filtro = catalogo.filter((libro) =>
+                libro.nombre.toLowerCase().includes(busqueda.toLowerCase())
+            );
+            setOpcionesFiltradas(filtro);
+        } else {
+            setOpcionesFiltradas([]);
+        }
+    }, [busqueda, catalogo]);
+
+    const handleChange = (e) => {
         setBusqueda(e.target.value);
     };
 
@@ -41,19 +41,11 @@ function Buscador() {
                 />
             </div>
             <div>
-
-                
                 {opcionesFiltradas.map((libro, index) => (
-
-                <Link to={`/catalogo/${libro.id}`} key={index} className="text-white">
-                    <p  key={index}> {libro.nombre} </p>
-                    </Link>     
-    
-                ))
-                
-                }
-
-                
+                    <Link to={`/catalogo/${libro.id}`} key={index} className="text-white">
+                        <p key={index}> {libro.nombre} </p>
+                    </Link>
+                ))}
             </div>
         </>
     );

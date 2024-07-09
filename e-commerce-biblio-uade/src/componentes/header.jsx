@@ -1,15 +1,18 @@
 // src/components/Header.js
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/cartContext";
 import logoLibros from '/logoLibros.png';
-import { logout } from "../features/auth/authSlice";
+import { logout, selectUsername, selectIsAuthenticated } from "../features/auth/authSlice"; // Importa selectUsername y selectIsAuthenticated
+import Button from '@mui/material/Button';
 
 function Header() {
-    const [cart, setCart] = useContext(CartContext);
+    const [cart] = useContext(CartContext);
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector(selectIsAuthenticated); // Obtén el estado de autenticación
+    const username = useSelector(selectUsername); // Obtén el nombre de usuario desde el estado de Redux
 
     const quantity = cart.reduce((acc, curr) => {
         return acc + curr.quantity;
@@ -17,6 +20,7 @@ function Header() {
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate('/');
     };
 
     return (
@@ -26,7 +30,7 @@ function Header() {
                     <div className="col-md-2 position-relative">
                         <img src={logoLibros} className="logo" alt="Vite logo" />
                         <Link to="/">
-                            <h1>BIBLIO UADE</h1>
+                            <h4>BIBLIO UADE</h4>
                         </Link>
                     </div>
                     <div className="col-md-6"></div>
@@ -48,10 +52,11 @@ function Header() {
                             </div>
                         </>
                     ) : (
-                        <div className="col-md-2 btn btn-lg btn-sesion">
-                            <div className="bg-warning rounded-2">
-                                <button onClick={handleLogout}>Cerrar sesión</button>
-                            </div>
+                        <div className="col-md-2">
+                                Bienvenido {username}
+                            
+                                <Button variant="contained" onClick={handleLogout}>Cerrar sesión</Button>
+                            
                         </div>
                     )}
                 </div>

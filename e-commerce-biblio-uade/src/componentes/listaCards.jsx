@@ -54,6 +54,8 @@ const ListaCard = () => {
         {libroStatus === 'succeeded' && librosFiltrados.length > 0 ? (
           librosFiltrados.map((product) => (
             <div className="col-md-4 col-sm-6 mb-3" key={product.id}>
+              {product.id}
+              {console.log(product.id)}
               <div className="card my-3 py-3 border-0">
                 <Card {...product} />
               </div>

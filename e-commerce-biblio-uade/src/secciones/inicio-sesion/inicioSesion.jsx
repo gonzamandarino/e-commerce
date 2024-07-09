@@ -1,8 +1,7 @@
-// src/components/InicioSesion.js
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { authenticateUser } from '../../service/authService';
-import { setToken } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { setToken, setUsername, authenticateUser } from '../../features/auth/authSlice';
 
 function InicioSesion() {
   const [usuario, setUsuario] = useState({
@@ -16,6 +15,7 @@ function InicioSesion() {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,16 +41,30 @@ function InicioSesion() {
     } else {
       newErrores.contrasena = "";
     }
-    console.log(usuario)
+
     setErrores(newErrores);
 
     if (Object.values(newErrores).every(error => error === "")) {
       try {
-        const token = await authenticateUser(usuario.nombre, usuario.contrasena);
+        // Llama a authenticateUser y espera su respuesta
+        const actionResult = await dispatch(authenticateUser({ nombre: usuario.nombre, pass: usuario.contrasena }));
+        
+        console.log("Respuesta completa de authenticateUser:", actionResult);
+        // La acción devuelve un objeto con 'payload' si fue exitosa
+        const token = actionResult.payload;
+      // Verifica que el token se haya guardado correctamente
+      console.log("Token SIN GUARDAR:", token);  
+        // Actualiza el estado con el token y el nombre de usuario
         dispatch(setToken(token));
+        dispatch(setUsername(usuario.nombre));
+
         console.log('Autenticación exitosa');
+        // Verifica que el token se haya guardado correctamente
+      console.log("Token guardado en el estado:", token);
+        navigate('/'); // Redirige al inicio
       } catch (error) {
         console.error('Error de autenticación:', error);
+        alert("Error de autenticación.");
       }
     }
   };
@@ -90,7 +104,7 @@ function InicioSesion() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default InicioSesion;
