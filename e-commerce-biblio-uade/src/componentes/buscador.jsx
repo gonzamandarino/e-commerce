@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchLibros } from '../features/libros/librosSlice';
+import DetalleLibro from './DetalleLibro';
 
 function Buscador() {
     const dispatch = useDispatch();
     const catalogo = useSelector((state) => state.libros.items); // Obtén los libros del estado de Redux
     const [busqueda, setBusqueda] = useState('');
     const [opcionesFiltradas, setOpcionesFiltradas] = useState([]);
+    const [selectedLibro, setSelectedLibro] = useState(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         dispatch(fetchLibros()); // Despacha la acción para obtener los libros
@@ -28,6 +30,16 @@ function Buscador() {
         setBusqueda(e.target.value);
     };
 
+    const handleOpen = (libro) => {
+        setSelectedLibro(libro);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setSelectedLibro(null);
+    };
+
     return (
         <>
             <div className="mb-3">
@@ -42,11 +54,23 @@ function Buscador() {
             </div>
             <div>
                 {opcionesFiltradas.map((libro, index) => (
-                    <Link to={`/catalogo/${libro.id}`} key={index} className="text-white">
-                        <p key={index}> {libro.nombre} </p>
-                    </Link>
+                    <p
+                        key={index}
+                        className="text-white"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleOpen(libro)}
+                    >
+                        {libro.nombre}
+                    </p>
                 ))}
             </div>
+            {selectedLibro && (
+                <DetalleLibro
+                    open={open}
+                    handleClose={handleClose}
+                    libroId={selectedLibro.libro_id}
+                />
+            )}
         </>
     );
 }

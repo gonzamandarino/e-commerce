@@ -22,7 +22,7 @@ const ListaCard = () => {
   }, [libroStatus, dispatch]);
 
   useEffect(() => {
-    const categoriasUnicas = [...new Set(libros.map(libro => libro.categoria))];
+    const categoriasUnicas = [...new Set(libros.flatMap(libro => libro.cate.map(c => c.nombre)))];
     setCategorias(categoriasUnicas);
   }, [libros]);
 
@@ -31,7 +31,7 @@ const ListaCard = () => {
   };
 
   const librosFiltrados = categoriaSeleccionada
-    ? libros.filter(libro => libro.categoria === categoriaSeleccionada)
+    ? libros.filter(libro => libro.cate.some(c => c.nombre === categoriaSeleccionada))
     : libros;
 
   return (
@@ -42,7 +42,7 @@ const ListaCard = () => {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-4 col-sm-6 mb-3">
-        <Filtro categorias={categorias} onFilterChange={handleFilterChange} />
+          <Filtro categorias={categorias} onFilterChange={handleFilterChange} />
         </div>
       </div>
       <div className="row justify-content-center">
@@ -54,9 +54,8 @@ const ListaCard = () => {
         {libroStatus === 'succeeded' && librosFiltrados.length > 0 ? (
           librosFiltrados.map((product) => (
             <div className="col-md-4 col-sm-6 mb-3" key={product.libro_id}>
-              {product.libro_id}
-              
               <div className="card my-3 py-3 border-0">
+
                 <Card {...product} />
               </div>
             </div>
