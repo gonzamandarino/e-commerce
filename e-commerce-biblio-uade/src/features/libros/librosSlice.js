@@ -7,8 +7,8 @@ export const fetchLibros = createAsyncThunk('libros/fetchLibros', async () => {
     return response.data;
 });
 
-export const getLibroByID = createAsyncThunk('libros/getLibroByID', async (id) => {
-    const response = await axios.get(`http://localhost:4002/libros/${id}`);
+export const getLibroByID = createAsyncThunk('libros/getLibroByID', async (libro_id) => {
+    const response = await axios.get(`http://localhost:4002/libros/${libro_id}`);
     return response.data;
 });
 
@@ -16,15 +16,35 @@ export const deleteLibro = createAsyncThunk(
     'libros/deleteLibro',
     async (id, { getState }) => {
         const token = selectToken(getState());
-        await axios.delete(`http://localhost:4002/libros/eliminar`, {
+        await axios.delete(`http://localhost:4002/libros/eliminar/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },
-            data: { id },
+            }
         });
         return id;
     }
 );
+
+
+
+export const addStockLibro = createAsyncThunk(
+    // 'libros/deleteLibro',
+    // async (id, { getState }) => {
+    //     const token = selectToken(getState());
+    //     await axios.delete(`http://localhost:4002/libros/eliminar`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //         data: { id },
+    //     });
+    //     return id;
+    // }
+);
+
+
+
+
+
 
 export const addLibro = createAsyncThunk(
     'libros/addLibro',

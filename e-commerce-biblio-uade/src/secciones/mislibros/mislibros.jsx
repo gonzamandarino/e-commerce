@@ -90,7 +90,7 @@ function MisLibros() {
                 {libroStatus === 'failed' && <p>{error}</p>}
                 {libroStatus === 'succeeded' && misLibros.length > 0 ? (
                     misLibros.map((libro) => (
-                        <div className="col-md-4 col-sm-6 mb-3" key={libro.id}>
+                        <div className="col-md-4 col-sm-6 mb-3" key={libro.libro_id}>
                             <div className="card my-3 py-3 border-0">
                                 <CardMod {...libro} />
                             </div>

@@ -4,34 +4,34 @@ import { Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import DetalleLibro from './DetalleLibro';
 
-export const Card = ({ nombre, precio, id, imagen }) => {
+export const Card = ({ nombre, precio, libro_id, imagen }) => {
   const [cart, setCart] = useContext(CartContext);
   const [open, setOpen] = useState(false);
 
   const addToCart = () => {
     setCart((currItems) => {
-      const isItemsFound = currItems.find((item) => item.id === id);
+      const isItemsFound = currItems.find((item) => item.libro_id === libro_id);
       if (isItemsFound) {
         return currItems.map((item) => {
-          if (item.id === id) {
+          if (item.libro_id === libro_id) {
             return { ...item, quantity: item.quantity + 1, nombre };
           } else {
             return item;
           }
         });
       } else {
-        return [...currItems, { id, quantity: 1, precio, nombre }];
+        return [...currItems, { libro_id, quantity: 1, precio, nombre }];
       }
     });
   };
 
-  const removeItem = (id) => {
+  const removeItem = (libro_id) => {
     setCart((currItems) => {
-      if (currItems.find((item) => item.id === id)?.quantity === 1) {
-        return currItems.filter((item) => item.id !== id);
+      if (currItems.find((item) => item.libro_id === libro_id)?.quantity === 1) {
+        return currItems.filter((item) => item.libro_id !== libro_id);
       } else {
         return currItems.map((item) => {
-          if (item.id === id) {
+          if (item.libro_id === libro_id) {
             return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
@@ -41,11 +41,11 @@ export const Card = ({ nombre, precio, id, imagen }) => {
     });
   };
 
-  const getQuantityById = (id) => {
-    return cart.find((item) => item.id === id)?.quantity || 0;
+  const getQuantityById = (libro_id) => {
+    return cart.find((item) => item.libro_id === libro_id)?.quantity || 0;
   };
 
-  const quantityPerItem = getQuantityById(id);
+  const quantityPerItem = getQuantityById(libro_id);
 
   const handleOpen = () => {
     setOpen(true);
@@ -80,13 +80,13 @@ export const Card = ({ nombre, precio, id, imagen }) => {
             </Button>
           )}
           {quantityPerItem > 0 && (
-            <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(id)}>
+            <Button variant="outlined" className="item-minus-Button" onClick={() => removeItem(libro_id)}>
               Sacar
             </Button>
           )}
         </div>
       </div>
-      <DetalleLibro open={open} handleClose={handleClose} libroId={id} />
+      <DetalleLibro open={open} handleClose={handleClose} libroId={libro_id} />
     </>
   );
 };

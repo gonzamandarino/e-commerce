@@ -5,14 +5,18 @@ import { Button } from '@mui/material';
 import ModificarLibroDialog from './ModificarLibroDialog';
 import { deleteLibro } from "../features/libros/librosSlice";
 
-export const CardMod = ({ nombre, precio, id, imagen }) => {
+export const CardMod = ({ nombre, precio, libro_id, imagen }) => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         nombre,
         precio,
-        imagen
+        imagen,
+
     });
+
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,7 +41,11 @@ export const CardMod = ({ nombre, precio, id, imagen }) => {
     };
 
     const handleDelete = () => {
-        dispatch(deleteLibro(id));
+        dispatch(deleteLibro(libro_id));
+    };
+
+    const handleStock = () => {
+        dispatch(addStockLibro(libro_id,cantidad));
     };
 
     return (
@@ -52,6 +60,9 @@ export const CardMod = ({ nombre, precio, id, imagen }) => {
             </Button>
             <Button variant="outlined" className="item-delete-Button" onClick={handleDelete}>
                 Borrar
+            </Button>
+            <Button variant="outlined" className="item-stock-Button" onClick={handleStock}>
+                Sumar stock
             </Button>
             </div>
         </div>
