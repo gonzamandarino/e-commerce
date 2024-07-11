@@ -1,13 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../contexts/cartContext";
 import { Button } from '@mui/material';
 import DetalleLibro from './DetalleLibro';
+import { useDispatch, useSelector } from 'react-redux';
+import { obtenerImagen } from "../features/imagenes/imagenesSlice";
 
-const Card = ({ nombre, precio, libro_id, imagen, stock }) => {
+const Card = ({ nombre, precio, libro_id, stock, imagen }) => { // Agrega imagen como prop
     const [cart, setCart] = useContext(CartContext);
     const [open, setOpen] = useState(false);
     const [stockCount, setStockCount] = useState(stock);
+    const dispatch = useDispatch();
+    const imageUrl = useSelector((state) => state.imagenes.imagenesPorLibro[imagen]); // Usa imagen como clave
+
+    useEffect(() => {
+        if (imagen && !imageUrl) {
+            dispatch(obtenerImagen(imagen)); // Llama a la acción para obtener la imagen si aún no está cargada
+        }
+    }, [dispatch, imagen, imageUrl]);
 
     const addToCart = () => {
         setCart((currItems) => {
@@ -61,15 +71,19 @@ const Card = ({ nombre, precio, libro_id, imagen, stock }) => {
     return (
         <>
             <div className="card-img-top text-center">
-                <img
-                    src={imagen}
-                    alt={nombre}
-                    className="photo w-75"
-                    width={"25%"}
-                    height={"150px"}
-                    onClick={handleOpen}
-                    style={{ cursor: 'pointer' }}
-                />
+                {imageUrl ? (
+                    <img
+                        src={imageUrl} // Utiliza la URL de la imagen obtenida por imagen
+                        alt={nombre}
+                        className="photo w-75"
+                        width={"25%"}
+                        height={"150px"}
+                        onClick={handleOpen}
+                        style={{ cursor: 'pointer' }}
+                    />
+                ) : (
+                    <div className="placeholder-image">Imagen no disponible</div>
+                )}
                 <div className="card-body">
                     <div className="card-price">${precio}</div>
                     <div className="card-title fw-bold fs-4">{nombre}</div>

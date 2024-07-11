@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLibroByID } from "../features/libros/librosSlice";
+import { obtenerImagen } from "../features/imagenes/imagenesSlice";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -14,23 +15,36 @@ import PropTypes from 'prop-types';
 export const DetalleLibro = ({ open, handleClose, libroId }) => {
   const dispatch = useDispatch();
   const libro = useSelector((state) => state.libros.selectedLibro);
+  const imagenesPorLibro = useSelector((state) => state.imagenes.imagenesPorLibro);
 
   useEffect(() => {
-    if (open) {
+    if (open && libroId) {
       dispatch(getLibroByID(libroId));
     }
   }, [dispatch, libroId, open]);
+
+  useEffect(() => {
+    if (libro?.imagen && open) {
+      dispatch(obtenerImagen(libro.imagen));
+    }
+  }, [dispatch, libro?.imagen, open]);
+
+  const imageUrl = imagenesPorLibro[libro?.imagen];
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>{libro?.nombre} - {libro?.autor}</DialogTitle>
       <DialogContent>
-        <CardMedia
-          component="img"
-          height="400"
-          image={libro?.imagen}
-          alt={libro?.nombre}
-        />
+        {imageUrl ? (
+          <CardMedia
+            component="img"
+            height="400"
+            image={imageUrl}
+            alt={libro?.nombre}
+          />
+        ) : (
+          <div>Imagen no disponible</div>
+        )}
         <DialogContentText>
           <Typography variant="h6" component="div" gutterBottom>
             Precio: ${libro?.precio}

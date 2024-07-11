@@ -5,7 +5,7 @@ import authReducer from '../features/auth/authSlice';
 import categoriasReducer from '../features/categorias/categoriasSlice';
 import misLibrosReducer from '../features/libros/misLibrosSlice';
 import ventaReducer from '../features/venta/ventaSlice'; // Importa el slice de venta
-
+import imagenesReducer from '../features/imagenes/imagenesSlice'; // Importa el slice de venta
 export const store = configureStore({
   reducer: {
     libros: librosReducer,
@@ -13,6 +13,7 @@ export const store = configureStore({
     auth: authReducer,
     misLibros: misLibrosReducer,
     venta: ventaReducer, 
+    imagenes: imagenesReducer,
   },
 });
 

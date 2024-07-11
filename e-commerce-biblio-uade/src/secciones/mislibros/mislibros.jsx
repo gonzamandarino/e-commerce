@@ -9,7 +9,7 @@ import { fetchCategorias } from '../../features/categorias/categoriasSlice';
 import { selectToken } from '../../features/auth/authSlice';
 import { addLibro } from '../../features/libros/librosSlice'; 
 import { getMisLibros } from '../../features/libros/misLibrosSlice';// Importa addLibro y getMisLibros desde librosSlice
-
+import { guardarImagen } from '../../features/imagenes/imagenesSlice';
 function MisLibros() {
     const dispatch = useDispatch();
     const misLibros = useSelector((state) => state.misLibros.items);
@@ -25,7 +25,7 @@ function MisLibros() {
         precio: '',
         autor: '',
         cate: [],
-        //imagen: null,
+        imagen: null,
         usuarioId: 1,
         stock: 0
     });
@@ -66,10 +66,15 @@ function MisLibros() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         console.log("EL TOKEN ES", token);
+        const action =  await dispatch(guardarImagen(formData.imagen));
+        const imagen_id = action.payload;
+        console.log(imagen_id);
+        formData.imagen = imagen_id;
+        console.log(formData);
+        
         dispatch(addLibro(formData));
         handleClose();
     };

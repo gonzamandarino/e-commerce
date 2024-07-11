@@ -4,15 +4,18 @@ import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } 
 import Select from 'react-select';
 import { useSelector } from 'react-redux';
 
-function AgregarLibroDialog({ open, handleClose, handleChange, handleSubmit, formData, handleFileChange, handleCategoryChange }) {
+function AgregarLibroDialog({ open, handleClose, handleChange, handleSubmit, formData, handleCategoryChange }) {
     const categorias = useSelector((state) => state.categorias.items);
 
-    //const isFormComplete = formData.titulo && formData.autor && formData.descripcion && formData.precio && formData.categorias.length > 0;
-
     const categoriaOptions = categorias.map(categoria => ({
-        value: categoria.categoria_id,  // Asegúrate de que esto coincida con el nombre correcto del campo ID
+        value: categoria.categoria_id,
         label: categoria.nombre
     }));
+
+    const onFileChange = async (e) => {
+        const file = e.target.files[0];
+        formData.imagen = file;
+    };
 
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -69,7 +72,7 @@ function AgregarLibroDialog({ open, handleClose, handleChange, handleSubmit, for
                     style={{ display: 'none' }}
                     id="raised-button-file"
                     type="file"
-                    onChange={handleFileChange}
+                    onChange={onFileChange} // Llama a onFileChange en lugar de handleFileChange directamente
                 />
                 <label htmlFor="raised-button-file">
                     <Button variant="contained" component="span">

@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, TextField } from '@mui/material';
 import ModificarLibroDialog from './ModificarLibroDialog';
 import { deleteLibro, addStockLibro, updateLibro } from "../features/libros/librosSlice";
+import { obtenerImagen } from "../features/imagenes/imagenesSlice"; // Importa la acción obtenerImagen
 
 export const CardMod = ({ nombre, precio, libro_id, imagen, descripcion, autor }) => {
     const dispatch = useDispatch();
@@ -17,6 +18,16 @@ export const CardMod = ({ nombre, precio, libro_id, imagen, descripcion, autor }
         autor,
         cate: []
     });
+
+    const imagenesPorLibro = useSelector((state) => state.imagenes.imagenesPorLibro); // Obtén las URLs de las imágenes por libro_id desde el estado de Redux
+
+    useEffect(() => {
+        if (imagen) {
+            dispatch(obtenerImagen(imagen)); // Llama a obtenerImagen con el ID de la imagen del libro
+        }
+    }, [dispatch, imagen]);
+
+    const imageUrl = imagenesPorLibro[imagen];
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -64,7 +75,11 @@ export const CardMod = ({ nombre, precio, libro_id, imagen, descripcion, autor }
     return (
         <>
             <div className="card-img-top text-center">
-                <img src={imagen} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
+                {imageUrl ? (
+                    <img src={imageUrl} alt={nombre} className="photo w-75" width={"25%"} height={"150px"} />
+                ) : (
+                    <div>Cargando imagen...</div>
+                )}
                 <div className="card-body">
                     <div className="card-price">${precio}</div>
                     <div className="card-title fw-bold fs-4">{nombre}</div>

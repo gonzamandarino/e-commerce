@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { selectToken } from '../auth/authSlice';
-
 export const fetchLibros = createAsyncThunk('libros/fetchLibros', async () => {
     const response = await axios.get('http://localhost:4002/libros');
     return response.data;
@@ -66,7 +65,8 @@ export const addLibro = createAsyncThunk(
             autor: libro.autor,
             cate: libro.cate,
             usuarioId: libro.usuarioId,
-            stock: libro.stock
+            stock: libro.stock,
+            imagen: libro.imagen
         };
 
         const response = await axios.post('http://localhost:4002/libros', data, {
