@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import getLibros from "../service/getLibros";
-import { Card } from "./card-libro";
+import Card from "./card-libro";
 
 export default function HomeCarousel() {
   const [libros, setLibros] = useState([]);

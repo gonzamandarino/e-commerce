@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLibros } from "../features/libros/librosSlice";
-import { Card } from "./card-libro";
+import Card from "./card-libro";
 import { Outlet } from "react-router-dom";
 import Buscador from "./buscador";
 import Filtro from "./Filtro";
