@@ -88,7 +88,7 @@ const Perfil = () => {
                                         <div className='col-md-2'>
                                             <Button
                                                 variant='contained'
-                                                onClick={() => handleEliminarUsuario(usuario.nombre)}
+                                                onClick={() => handleEliminarUsuario(usuario.id)}
                                                 disabled={isCurrentUser(usuario.nombre)}
                                             >
                                                 Borrar

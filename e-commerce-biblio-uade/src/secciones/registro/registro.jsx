@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Registro() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function Registro() {
     email: '',
     contrasena: ''
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +58,8 @@ function Registro() {
       dispatch(registerUser({ nombre: usuario.nombre, pass: usuario.contrasena, role: 'USER' }))
         .then(() => {
           alert("Te has registrado con exito!");
-          console.log('Registro exitoso!');
+          console.log('Registro exitoso!, por favor inicie sesion');
+          navigate('/inicio-sesion'); 
         })
         .catch(error => {
           console.error('Error durante el registro:', error);
