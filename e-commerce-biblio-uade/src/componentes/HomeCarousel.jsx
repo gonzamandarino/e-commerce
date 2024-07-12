@@ -30,7 +30,7 @@ export default function HomeCarousel() {
   return (
     <Slider {...settings}>
       {libros.map((product) => (
-        <div className="col-md-12 mx-auto" key={product.id || product.tempKey}>
+        <div className="col-md-12 mx-auto bg-warning rounded-5 justify-content-center" key={product.id || product.tempKey}>
           <Card {...product} />
         </div>
       ))}

@@ -28,10 +28,10 @@ function Header() {
         <>
             <header className="container-fluid">
                 <div className="row">
-                    <div className="col-md-2 position-relative">
+                    <div className="col-md-2 position-relative ">
                         <img src={logoLibros} className="logo" alt="Vite logo" />
                         <Link to="/">
-                            <h4>BIBLIO UADE</h4>
+                            <h4 className="bg-warning rounded-3 btn p-2">BIBLIO UADE</h4>
                         </Link>
                     </div>
                     <div className="col-md-6"></div>
@@ -53,8 +53,8 @@ function Header() {
                             </div>
                         </>
                     ) : (
-                        <div className="col-md-4 d-flex align-items-center justify-content-end">
-                            <span>Bienvenido {username}</span>
+                        <div className="col-md-4 d-flex align-items-center justify-content-end ">
+                            <span className="bg-warning rounded-3  p-2">Bienvenido {username}</span>
                             <Link to="/perfil">
                                 <Button variant="contained" className="mx-2">Mi perfil</Button>
                             </Link>

@@ -45,14 +45,14 @@ const ListaCard = () => {
   return (
     <div className="container-fluid">
       <Buscador />
-      <div className="row justify-content-center">
+      <div className="row justify-content-center rounded-5 bg-warning">
         <h2>Llevando más de 3 libros tenés un 15% de descuento con tu compra!</h2>
       </div>
       <div className="row justify-content-center">
-        <div className="col-md-4 col-sm-6 mb-3">
+        <div className="col-md-4 col-sm-6 mb-3 p-3 ">
           <Filtro categorias={categorias} onFilterChange={handleFilterChange} />
         </div>
-        <div className="col-md-2">
+        <div className=" col-md-2  bg-warning m-2 ">
           <PriceFilter onFilter={handlePriceFilter} />  
 
         </div>
