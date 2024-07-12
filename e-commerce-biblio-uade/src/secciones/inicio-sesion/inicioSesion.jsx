@@ -100,7 +100,6 @@ function InicioSesion() {
               </div>
               <button className="btn btn-second" onClick={recuperUsuario}>Recuperar contraseña</button>
             </form>
-            <button className="btn btn-secondary" onClick={recuperUsuario}>Recuperar contraseña</button>
           </div>
         </div>
       </div>

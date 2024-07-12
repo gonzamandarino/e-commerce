@@ -29,11 +29,12 @@ const Perfil = () => {
                 <Link to="/modificar-perfil">
                     <Button variant="contained" className="mx-2">Modificar</Button>
                 </Link>
-            </div>
+            </div >
             {isAdmin && (
                 <>
+                    
+                    <div className='row mb-3 bg-warning p-2 rounded-5'>
                     <h3>Lista de Todos los Usuarios</h3>
-                    <div className='row'>
                         <div className='row'>
                             <div className='col-md-2'>
                                 Nombre
