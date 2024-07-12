@@ -62,7 +62,7 @@ export const actualizarRol = createAsyncThunk(
     async ({ id, nuevoRol }, thunkAPI) => {
         const token = selectToken(thunkAPI.getState());
         try {
-            const response = await axios.patch(`http://127.0.0.1:4002/usuarios/rol/${id}`, 
+            const response = await axios.put(`http://127.0.0.1:4002/usuarios/rol/${id}`, 
             { rol: nuevoRol },
             {
                 headers: {
