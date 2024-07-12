@@ -70,7 +70,7 @@ const Card = ({ nombre, precio, libro_id, stock, imagen }) => { // Agrega imagen
 
     return (
         <>
-            <div className="card-img-top text-center">
+            <div className="card-img-top text-center ">
                 {imageUrl ? (
                     <img
                         src={imageUrl} // Utiliza la URL de la imagen obtenida por imagen

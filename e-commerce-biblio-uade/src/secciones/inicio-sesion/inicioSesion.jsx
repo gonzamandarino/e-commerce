@@ -98,8 +98,9 @@ function InicioSesion() {
                 <br />
                 <button type="submit" className="btn btn-primary">Enviar</button>
               </div>
+              <button className="btn btn-second" onClick={recuperUsuario}>Recuperar contraseña</button>
             </form>
-            <button className="btn btn-second" onClick={recuperUsuario}>Recuperar contraseña</button>
+            
           </div>
         </div>
       </div>

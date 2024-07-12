@@ -18,17 +18,19 @@ const Perfil = () => {
     }, [dispatch]);
 
     return (
-        <div className="container mt-4">
+        <div className="container mt-4  ">
+            
+            <div className="mb-3 bg-warning p-2 rounded-5">
             <h2>Perfil de Usuario</h2>
-            <div className="mb-3">
                 <strong>Nombre de usuario:</strong> {username}
                 <Link to="/modificar-perfil">
                     <Button variant="contained" className="mx-2">Modificar</Button>
                 </Link>
-            </div>
+            </div >
+            
+            <div className='mb-3 bg-warning p-2 rounded-5'>
             <h3>Lista de Todos los Usuarios</h3>
-            <div className='row'>
-                <div className='row'>
+                <div className='row rounded-5'>
                     <div className='col-md-2'>
                         Nombre
                     </div>
