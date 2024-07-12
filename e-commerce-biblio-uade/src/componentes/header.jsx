@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../contexts/cartContext";
 import logoLibros from '/logoLibros.png';
 import { logout, selectUsername, selectIsAuthenticated } from "../features/auth/authSlice";
+import { selectIsAdmin } from "../features/usuario/usuarioSlice"; // Importa el selector
 import Button from '@mui/material/Button';
 
 function Header() {
@@ -12,6 +13,7 @@ function Header() {
     const navigate = useNavigate();
     const isAuthenticated = useSelector(selectIsAuthenticated);
     const username = useSelector(selectUsername);
+    const isAdmin = useSelector(selectIsAdmin); // Usa el selector
 
     const quantity = cart.reduce((acc, curr) => {
         return acc + curr.quantity;
@@ -78,7 +80,7 @@ function Header() {
                                 Contacto
                             </Link>
                         </div>
-                        {isAuthenticated && (
+                        {isAuthenticated && isAdmin && (
                             <div id="categorias" className="col-md-1">
                                 <Link to={"/categorias"}>
                                     Categorías

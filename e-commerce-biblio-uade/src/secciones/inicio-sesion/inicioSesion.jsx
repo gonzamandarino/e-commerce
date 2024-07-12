@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setToken, setUsername, authenticateUser } from '../../features/auth/authSlice';
+import { isAdmin } from '../../features/usuario/usuarioSlice'; // Importa el thunk isAdmin
 
 function InicioSesion() {
   const [usuario, setUsuario] = useState({
@@ -46,22 +47,21 @@ function InicioSesion() {
 
     if (Object.values(newErrores).every(error => error === "")) {
       try {
-        // Llama a authenticateUser y espera su respuesta
         const actionResult = await dispatch(authenticateUser({ nombre: usuario.nombre, pass: usuario.contrasena }));
         
-        console.log("Respuesta completa de authenticateUser:", actionResult);
-        // La acción devuelve un objeto con 'payload' si fue exitosa
         const token = actionResult.payload;
-      // Verifica que el token se haya guardado correctamente
-      console.log("Token SIN GUARDAR:", token);  
-        // Actualiza el estado con el token y el nombre de usuario
         dispatch(setToken(token));
         dispatch(setUsername(usuario.nombre));
 
-        console.log('Autenticación exitosa');
-        // Verifica que el token se haya guardado correctamente
-      console.log("Token guardado en el estado:", token);
-        navigate('/'); // Redirige al inicio
+        // Verificar si el usuario es administrador
+        const adminResult = await dispatch(isAdmin());
+        if (adminResult.payload) {
+          console.log("El usuario es administrador");
+        } else {
+          console.log("El usuario no es administrador");
+        }
+
+        navigate('/'); 
       } catch (error) {
         console.error('Error de autenticación:', error);
         alert("Error de autenticación.");
@@ -99,7 +99,7 @@ function InicioSesion() {
                 <button type="submit" className="btn btn-primary">Enviar</button>
               </div>
             </form>
-            <button className="btn btn-second" onClick={recuperUsuario}>Recuperar contraseña</button>
+            <button className="btn btn-secondary" onClick={recuperUsuario}>Recuperar contraseña</button>
           </div>
         </div>
       </div>

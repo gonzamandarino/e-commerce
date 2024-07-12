@@ -2,11 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { selectToken } from '../auth/authSlice';
 
-// Async Thunk para obtener todos los usuarios
 export const fetchUsuarios = createAsyncThunk(
     'usuario/fetchUsuarios',
     async (_, thunkAPI) => {
-        const token = selectToken(thunkAPI.getState()); // Obtener el token del estado usando thunkAPI
+        const token = selectToken(thunkAPI.getState());
         try {
             const response = await axios.get('http://localhost:4002/usuarios/all', {
                 headers: {
@@ -21,10 +20,28 @@ export const fetchUsuarios = createAsyncThunk(
     }
 );
 
+export const isAdmin = createAsyncThunk(
+    'usuario/isAdmin',
+    async (_, thunkAPI) => {
+        const token = selectToken(thunkAPI.getState());
+        try {
+            const response = await axios.get('http://localhost:4002/usuarios/admin', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data; // Assuming this returns a boolean or an object indicating admin status
+        } catch (error) {
+            console.error('Error al obtener datos de usuario:', error);
+            throw error;
+        }
+    }
+);
+
 export const obtenerIdUsuario = createAsyncThunk(
     'usuario/obtenerIdUsuario',
-    async (nombre) => {
-        const token = selectToken();
+    async (nombre, thunkAPI) => {
+        const token = selectToken(thunkAPI.getState());
         try {
             const response = await axios.get('http://localhost:4002/usuarios/buscarId', {
                 headers: {
@@ -32,7 +49,6 @@ export const obtenerIdUsuario = createAsyncThunk(
                 },
                 data: { "nombre": nombre }
             });
-            console.log(response.data.id);
             return response.data.id;
         } catch (error) {
             console.error('Error al obtener el ID del usuario:', error);
@@ -45,6 +61,7 @@ const usuarioSlice = createSlice({
     name: 'usuario',
     initialState: {
         usuarioId: null,
+        isAdmin: false,
         status: 'idle',
         error: null,
         items: []  // Aquí se almacenarán los usuarios obtenidos
@@ -80,6 +97,9 @@ const usuarioSlice = createSlice({
             .addCase(fetchUsuarios.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+            })
+            .addCase(isAdmin.fulfilled, (state, action) => {
+                state.isAdmin = action.payload;
             });
     },
 });
@@ -89,6 +109,7 @@ export const { setUsuarioId, resetUsuarioId } = usuarioSlice.actions;
 export const selectUsuarioId = (state) => state.usuario.usuarioId;
 export const selectUsuarioStatus = (state) => state.usuario.status;
 export const selectUsuarioError = (state) => state.usuario.error;
+export const selectIsAdmin = (state) => state.usuario.isAdmin;
 
 export const selectItems = (state) => state.usuario.items;
 
