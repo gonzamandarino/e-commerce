@@ -48,6 +48,12 @@ function InicioSesion() {
     if (Object.values(newErrores).every(error => error === "")) {
       try {
         const actionResult = await dispatch(authenticateUser({ nombre: usuario.nombre, pass: usuario.contrasena }));
+        console.log(actionResult.payload)
+
+        if(actionResult.payload==undefined){
+          throw error
+        }
+        
         
         const token = actionResult.payload;
         dispatch(setToken(token));
@@ -62,9 +68,9 @@ function InicioSesion() {
         }
 
         navigate('/'); 
-      } catch (error) {
-        console.error('Error de autenticación:', error);
-        alert("Error de autenticación.");
+      } catch (e) {
+        console.error('Error de autenticación:', );
+        alert("Contraseña incorrecta");
       }
     }
   };
