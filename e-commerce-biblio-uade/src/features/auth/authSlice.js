@@ -5,7 +5,6 @@ export const authenticateUser = createAsyncThunk(
     'auth/authenticateUser',
     async ({ nombre, pass }) => {
         const response = await axios.post('http://localhost:4002/api/v1/auth/authenticate', { "nombre": nombre, "pass": pass });
-        console.log("EL TOKEN ES", response.data);
         return response.data.access_token;
     }
 );
@@ -25,7 +24,7 @@ const authSlice = createSlice({
         isAuthenticated: false,
         status: 'idle',
         error: null,
-        username: '', // Nuevo campo para el nombre de usuario
+        username: '', 
     },
     reducers: {
         setToken: (state, action) => {
@@ -38,7 +37,7 @@ const authSlice = createSlice({
         logout: (state) => {
             state.token = null;
             state.isAuthenticated = false;
-            state.username = ''; // Limpiar el nombre de usuario al cerrar sesión
+            state.username = ''; 
         }
     },
     extraReducers: (builder) => {
@@ -46,17 +45,15 @@ const authSlice = createSlice({
             .addCase(authenticateUser.fulfilled, (state, action) => {
                 state.token = action.payload.token;
                 state.isAuthenticated = true;
-                state.username = action.payload.username; // Guardar el nombre de usuario
+                state.username = action.payload.username; 
             })
             .addCase(authenticateUser.rejected, (state, action) => {
                 state.error = action.error.message;
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                // Aquí puedes manejar la respuesta después del registro si es necesario
-                // Por ejemplo, actualizar el estado de autenticación si el registro es exitoso
-                state.token = action.payload.token; // Actualiza el token después del registro si es relevante
-                state.isAuthenticated = true; // Establece la autenticación como verdadera después del registro
-                state.username = action.payload.username; // Guarda el nombre de usuario registrado
+                state.token = action.payload.token; 
+                state.isAuthenticated = true; 
+                state.username = action.payload.username; 
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.error = action.error.message;

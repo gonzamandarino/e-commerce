@@ -30,7 +30,7 @@ export const isAdmin = createAsyncThunk(
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data; // Assuming this returns a boolean or an object indicating admin status
+            return response.data;
         } catch (error) {
             console.error('Error al obtener datos de usuario:', error);
             throw error;
@@ -57,6 +57,26 @@ export const obtenerIdUsuario = createAsyncThunk(
     }
 );
 
+export const actualizarRol = createAsyncThunk(
+    'usuario/actualizarRol',
+    async ({ id, nuevoRol }, thunkAPI) => {
+        const token = selectToken(thunkAPI.getState());
+        try {
+            const response = await axios.patch(`http://127.0.0.1:4002/usuarios/rol/${id}`, 
+            { rol: nuevoRol },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error al actualizar el rol del usuario:', error);
+            throw error;
+        }
+    }
+);
+
 const usuarioSlice = createSlice({
     name: 'usuario',
     initialState: {
@@ -64,7 +84,7 @@ const usuarioSlice = createSlice({
         isAdmin: false,
         status: 'idle',
         error: null,
-        items: []  // Aquí se almacenarán los usuarios obtenidos
+        items: []
     },
     reducers: {
         setUsuarioId: (state, action) => {
@@ -100,6 +120,21 @@ const usuarioSlice = createSlice({
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
                 state.isAdmin = action.payload;
+            })
+            .addCase(actualizarRol.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(actualizarRol.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // Find and update the user in the items array
+                const updatedUserIndex = state.items.findIndex(user => user.id === action.payload.id);
+                if (updatedUserIndex !== -1) {
+                    state.items[updatedUserIndex] = action.payload;
+                }
+            })
+            .addCase(actualizarRol.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
             });
     },
 });
@@ -110,7 +145,6 @@ export const selectUsuarioId = (state) => state.usuario.usuarioId;
 export const selectUsuarioStatus = (state) => state.usuario.status;
 export const selectUsuarioError = (state) => state.usuario.error;
 export const selectIsAdmin = (state) => state.usuario.isAdmin;
-
 export const selectItems = (state) => state.usuario.items;
 
 export default usuarioSlice.reducer;

@@ -1,7 +1,6 @@
-// src/components/Perfil.js
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsuarios, selectItems, selectUsuarioStatus, selectUsuarioError, selectIsAdmin } from '../../features/usuario/usuarioSlice';
+import { fetchUsuarios, selectItems, selectUsuarioStatus, selectUsuarioError, selectIsAdmin, actualizarRol } from '../../features/usuario/usuarioSlice';
 import { selectUsername } from '../../features/auth/authSlice';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -19,6 +18,18 @@ const Perfil = () => {
             dispatch(fetchUsuarios());
         }
     }, [dispatch, isAdmin]);
+
+    const handleActualizarRol = (id, nuevoRol) => {
+        dispatch(actualizarRol({ id, nuevoRol }));
+    };
+
+    const decideRol = (rolActual) => {
+        if (rolActual === 'ADMIN'){
+            return 'USER';
+        }else{
+            return 'ADMIN';
+        }
+    }
 
     return (
         <div className="container mt-4">
@@ -61,7 +72,10 @@ const Perfil = () => {
                                                 {usuario.role}
                                             </div>
                                             <div className='col-md-2'>
-                                                <Button variant='contained'>
+                                                <Button
+                                                    variant='contained'
+                                                    onClick={() => handleActualizarRol(usuario.id, decideRol(usuario.role))} // Reemplaza 'nuevoRol' con el nuevo rol que desees asignar
+                                                >
                                                     Modificar
                                                 </Button>
                                             </div>
