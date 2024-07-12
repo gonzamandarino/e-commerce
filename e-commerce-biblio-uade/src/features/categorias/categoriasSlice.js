@@ -2,6 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { selectToken } from '../auth/authSlice';
+
 export const fetchCategorias = createAsyncThunk('categorias/fetchCategorias', async () => {
     const response = await axios.get('http://localhost:4002/categoria');
     return response.data;
@@ -18,8 +19,22 @@ export const postCategoria = createAsyncThunk('categorias/postCategoria', async 
         console.log(response.data);
         return response.data;
     } catch (error) {
-        // Manejo de errores específico para el frontend
         console.error('Error al agregar categoría:', error);
+        return rejectWithValue(error.message);
+    }
+});
+
+export const eliminarCategoria = createAsyncThunk('categorias/eliminarCategoria', async (id, { rejectWithValue, getState }) => {
+    try {
+        const token = selectToken(getState());
+        const response = await axios.delete(`http://127.0.0.1:4002/categoria/borrar/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error al eliminar categoría:', error);
         return rejectWithValue(error.message);
     }
 });
@@ -50,9 +65,20 @@ const categoriaSlice = createSlice({
             })
             .addCase(postCategoria.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.items.push(action.payload); // Opcionalmente, puedes actualizar el estado con la nueva categoría
+                state.items.push(action.payload); 
             })
             .addCase(postCategoria.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(eliminarCategoria.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(eliminarCategoria.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.items = state.items.filter(categoria => categoria.id !== action.payload.id);
+            })
+            .addCase(eliminarCategoria.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

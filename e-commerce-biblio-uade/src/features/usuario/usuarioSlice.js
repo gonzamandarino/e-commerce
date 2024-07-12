@@ -77,6 +77,25 @@ export const actualizarRol = createAsyncThunk(
     }
 );
 
+export const eliminarUsuario = createAsyncThunk(
+    'usuario/eliminarUsuario',
+    async (userId, thunkAPI) => {
+        const token = selectToken(thunkAPI.getState());
+        try {
+            await axios.delete(`http://127.0.0.1:4002/usuarios/eliminar/${userId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return userId;
+        } catch (error) {
+            console.error('Error al eliminar usuario:', error);
+            throw error;
+        }
+    }
+);
+
 const usuarioSlice = createSlice({
     name: 'usuario',
     initialState: {
@@ -126,13 +145,25 @@ const usuarioSlice = createSlice({
             })
             .addCase(actualizarRol.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Find and update the user in the items array
+                
                 const updatedUserIndex = state.items.findIndex(user => user.id === action.payload.id);
                 if (updatedUserIndex !== -1) {
                     state.items[updatedUserIndex] = action.payload;
                 }
             })
             .addCase(actualizarRol.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(eliminarUsuario.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(eliminarUsuario.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                
+                state.items = state.items.filter(user => user.id !== action.payload);
+            })
+            .addCase(eliminarUsuario.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             });

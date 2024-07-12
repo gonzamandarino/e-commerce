@@ -1,7 +1,8 @@
 // src/components/MostrarCategorias.js
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategorias, selectCategorias, selectCategoriasStatus, selectCategoriasError } from '../features/categorias/categoriasSlice';
+import { fetchCategorias, selectCategorias, selectCategoriasStatus, selectCategoriasError, eliminarCategoria } from '../features/categorias/categoriasSlice';
+import { Button } from '@mui/material';
 
 const MostrarCategorias = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,12 @@ const MostrarCategorias = () => {
         dispatch(fetchCategorias());
     }, [dispatch]);
 
+    const handleEliminarCategoria = (id) => {
+        if (window.confirm('¿Estás seguro que deseas eliminar esta categoría?')) {
+            dispatch(eliminarCategoria(id));
+        }
+    };
+
     return (
         <div className="container mt-4">
             <h2>Categorías Disponibles</h2>
@@ -23,6 +30,9 @@ const MostrarCategorias = () => {
                     {categorias.map((categoria) => (
                         <li key={categoria.id} className="list-group-item">
                             <strong>{categoria.nombre}</strong>: {categoria.descripcion}
+                            <Button onClick={() => handleEliminarCategoria(categoria.id)} variant="contained" color="error">
+                                Borrar
+                            </Button>
                         </li>
                     ))}
                 </ul>
