@@ -36,15 +36,15 @@ function Header() {
                     <div className="col-md-6"></div>
                     {!isAuthenticated ? (
                         <>
-                            <div className="col-md-2 btn btn-lg btn-sesion">
-                                <div className="bg-warning rounded-2">
+                            <div className="col-md-2 ">
+                                <div className="bg-warning rounded-2 btn">
                                     <Link to="/inicio-sesion">
                                         Iniciar sesión
                                     </Link>
                                 </div>
                             </div>
-                            <div className="col-md-2 btn btn-lg btn-sesion">
-                                <div className="bg-warning rounded-2">
+                            <div className="col-md-2">
+                                <div className="bg-warning rounded-2 btn">
                                     <Link to="/registro">
                                         Registro
                                     </Link>
@@ -54,15 +54,16 @@ function Header() {
                     ) : (
                         <div className="col-md-2">
                                 Bienvenido {username}
-                            
-                                <Button variant="contained" onClick={handleLogout}>Cerrar sesión</Button>
+                                <div className="col-md-12">
+                                <Button variant="contained" className="col-md-4 btn" onClick={handleLogout}>Cerrar sesión</Button>
+                                </div>
                             
                         </div>
                     )}
                 </div>
                 <nav className="row text-black">
-                    <div className="col-md-1 bg-warning text-black"></div>
-                    <div className="col-md-11 bg-warning d-flex justify-content-start text-black">
+                    <div className="col-md-12 bg-warning text-black"></div>
+                    <div className="col-md-12 bg-warning d-flex justify-content-start text-black">
                         <div id="inicio" className="col-md-1 text-white">
                             <Link to={"/"}>
                                 Inicio
@@ -79,17 +80,17 @@ function Header() {
                             </Link>
                         </div>
                         {!isAuthenticated ? (
-                            <div id="cart" className="col-md-2 disabled">
+                            <div id="cart" className="col-md-1 disabled">
                                 <span>Cart items: <span className="cart-count">{quantity}</span></span>
                             </div>
                         ) : (
-                            <div id="cart" className="col-md-2">
+                            <div id="cart" className="col-md-1">
                                 <Link to={"/cart"}>
                                     Cart items: <span className="cart-count">{quantity}</span>
                                 </Link>
                             </div>
                         )}
-                        <div className="col-md 4"></div>
+                        <div className="col-md-7"></div>
                         {!isAuthenticated ? (
                             <div id="mis-libros" className="col-md-1 disabled">
                                 <span>Mis libros</span>

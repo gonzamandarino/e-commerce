@@ -5,6 +5,7 @@ import Card from "./card-libro";
 import { Outlet } from "react-router-dom";
 import Buscador from "./buscador";
 import Filtro from "./Filtro";
+import PriceFilter from "./FiltroPrecio";
 
 const ListaCard = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const ListaCard = () => {
   
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [categorias, setCategorias] = useState([]);
+  const [precioFiltro, setPrecioFiltro] = useState({ minPrice: 0, maxPrice: Infinity }); // Agregar estado para el filtro de precio
 
   useEffect(() => {
     if (libroStatus === 'idle') {
@@ -30,9 +32,15 @@ const ListaCard = () => {
     setCategoriaSeleccionada(categoria);
   };
 
-  const librosFiltrados = categoriaSeleccionada
-    ? libros.filter(libro => libro.cate.some(c => c.nombre === categoriaSeleccionada))
-    : libros;
+  const handlePriceFilter = ({ minPrice, maxPrice }) => {
+    setPrecioFiltro({ minPrice, maxPrice });
+  };
+
+  const librosFiltrados = libros.filter(libro => {
+    const inCategory = categoriaSeleccionada ? libro.cate.some(c => c.nombre === categoriaSeleccionada) : true;
+    const inPriceRange = libro.precio >= precioFiltro.minPrice && libro.precio <= precioFiltro.maxPrice;
+    return inCategory && inPriceRange;
+  });
 
   return (
     <div className="container-fluid">
@@ -43,6 +51,14 @@ const ListaCard = () => {
       <div className="row justify-content-center">
         <div className="col-md-4 col-sm-6 mb-3">
           <Filtro categorias={categorias} onFilterChange={handleFilterChange} />
+        </div>
+        <div className="col-md-2">
+          <PriceFilter onFilter={handlePriceFilter} />  
+
+        </div>
+      </div>
+      <div className="row justify-content-left">
+        <div className="col-md-1 col-sm-6">
         </div>
       </div>
       <div className="row justify-content-center">
@@ -55,7 +71,6 @@ const ListaCard = () => {
           librosFiltrados.map((product) => (
             <div className="col-md-4 col-sm-6 mb-3" key={product.libro_id}>
               <div className="card my-3 py-3 border-0">
-
                 <Card {...product} />
               </div>
             </div>

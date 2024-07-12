@@ -11,7 +11,11 @@ export default function HomeCarousel() {
 
   useEffect(() => {
     getLibros().then((data) => {
-      setLibros(data);
+      const librosConKey = data.map((libro, index) => ({
+        ...libro,
+        tempKey: index
+      }));
+      setLibros(librosConKey);
     });
   }, []);
 
@@ -26,7 +30,7 @@ export default function HomeCarousel() {
   return (
     <Slider {...settings}>
       {libros.map((product) => (
-        <div className="col-md-12 mx-auto" key={product.id}>
+        <div className="col-md-12 mx-auto" key={product.id || product.tempKey}>
           <Card {...product} />
         </div>
       ))}

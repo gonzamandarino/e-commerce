@@ -50,7 +50,7 @@ export const DetalleLibro = ({ open, handleClose, libroId }) => {
             Precio: ${libro?.precio}
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            {libro?.resumen}
+            {libro?.descripcion}
           </Typography>
         </DialogContentText>
       </DialogContent>
