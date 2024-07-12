@@ -26,6 +26,30 @@ export const guardarImagen = createAsyncThunk(
     }
 );
 
+
+export const cambiarImagen = createAsyncThunk(
+    'imagenes/cambiarImagen',
+    async (file, { getState },id) => {
+        const token = selectToken(getState());
+
+        // Configura el FormData para enviar el archivo
+        const formData = new FormData();
+        formData.append('datosImagen', file);
+
+        try {
+            const response = await axios.put(`http://localhost:4002/imagenes/guardar/cambiar/${id}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data', // Especifica el tipo de contenido
+                },
+            });
+            return response.data; // Devuelve el ID de la imagen guardada
+        } catch (error) {
+            throw error.response.data; // Propaga el error para manejarlo en el componente
+        }
+    }
+);
+
 // Acción asincrónica para obtener una imagen por su ID
 export const obtenerImagen = createAsyncThunk(
     'imagenes/obtenerImagen',
