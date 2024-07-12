@@ -32,27 +32,27 @@ export const obtenerImagen = createAsyncThunk(
     async (id) => {
         try {
             const response = await axios.get(`http://localhost:4002/imagenes/${id}`, {
-                responseType: 'arraybuffer', // Indica que la respuesta es un array de bytes
+                responseType: 'arraybuffer',
             });
             
             // Crea un blob a partir de los datos de la imagen recibidos
             const blob = new Blob([response.data], { type: 'image/jpeg' });
             const imageUrl = URL.createObjectURL(blob);
 
-            return { id, imageUrl }; // Devuelve el ID y la URL de la imagen para mostrarla en el frontend
+            return { id, imageUrl }; 
         } catch (error) {
-            throw error.response.data; // Propaga el error para manejarlo en el componente
+            throw error.response.data; 
         }
     }
 );
 
-// Slice de Redux para manejar el estado de las imágenes
+
 const imagenesSlice = createSlice({
     name: 'imagenes',
     initialState: {
         status: 'idle',
         error: null,
-        imagenesPorLibro: {}, // Objeto para almacenar las URLs de las imágenes por libro_id
+        imagenesPorLibro: {}, 
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -62,7 +62,7 @@ const imagenesSlice = createSlice({
             })
             .addCase(guardarImagen.fulfilled, (state) => {
                 state.status = 'succeeded';
-                // No se está usando directamente en este ejemplo
+                
             })
             .addCase(guardarImagen.rejected, (state, action) => {
                 state.status = 'failed';
@@ -74,7 +74,7 @@ const imagenesSlice = createSlice({
             .addCase(obtenerImagen.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 const { id, imageUrl } = action.payload;
-                state.imagenesPorLibro[id] = imageUrl; // Almacena la URL de la imagen por libro_id
+                state.imagenesPorLibro[id] = imageUrl; 
             })
             .addCase(obtenerImagen.rejected, (state, action) => {
                 state.status = 'failed';

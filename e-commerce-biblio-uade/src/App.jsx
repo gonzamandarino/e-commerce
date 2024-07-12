@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Header from './componentes/header';
 import Inicio from './secciones/inicio/inicio';
 import Contacto from './secciones/Contacto/Contacto';
@@ -12,12 +11,10 @@ import DetalleLibro from './componentes/DetalleLibro';
 import ListaCard from './componentes/listaCards'
 import ShoppingCart from './componentes/cart'
 import Mislibros from './secciones/mislibros/mislibros';
+import Perfil from './secciones/perfil/perfil';
+import AdministrarCategorias from './secciones/categorias/categorias';
 
 function App() {
-  const [estadoVariable, setEstadoVariable] = useState(0);
-  
-
-  
 
   return (
     <>
@@ -35,9 +32,14 @@ function App() {
           </Route>
           
           <Route path="/cart" element={<ShoppingCart />} />
-          {/* TODO */}
           <Route path='/contacto' element={<Contacto></Contacto>}/>
-          <Route path='/mislibros' element={<Mislibros></Mislibros>}/></Routes>
+          <Route path='/mislibros' element={<Mislibros></Mislibros>}/>
+          
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/categorias" element={<AdministrarCategorias />} />
+          
+          </Routes>
+
       </Router>
     </ShoppingCartProvider>
     <Footer></Footer>
